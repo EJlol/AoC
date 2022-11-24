@@ -17,7 +17,7 @@ public class Task2 implements Task {
 	public int executeTask() {
 		Deque<Integer> oldValues = new ArrayDeque<>();
 
-		return NumberReader.read(URL)
+		return new NumberReader().read(URL)
 				.reduce(0, (sum, value) -> {
 					int totalLastValues = oldValues.size() == WINDOW_SIZE ? oldValues.stream()
 							.reduce(0, Integer::sum) : Integer.MAX_VALUE;

@@ -13,14 +13,14 @@ public class Task1 implements Task {
 
 	public int executeTask() {
 		AtomicInteger oldValue = new AtomicInteger(Integer.MAX_VALUE);
-		return NumberReader.read(URL)
-			.reduce(0, (sum, value) -> {
-				if (value > oldValue.get()) {
+		return new NumberReader().read(URL)
+				.reduce(0, (sum, value) -> {
+					if (value > oldValue.get()) {
+						oldValue.set(value);
+						return sum + 1;
+					}
 					oldValue.set(value);
-					return sum + 1;
-				}
-				oldValue.set(value);
-				return sum;
-			});
+					return sum;
+				});
 	}
 }
