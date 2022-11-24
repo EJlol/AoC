@@ -4,11 +4,11 @@ import java.util.stream.Stream;
 
 public class NumberReader implements PuzzleReader {
 
-	private NumberReader() {
-
+	public NumberReader() {
+		throw new UnsupportedOperationException();
 	}
 
-	public static Stream<Integer> read(String url) {
+	public Stream<Integer> read(String url) {
 		String body = PuzzleReader.getPuzzleContent(url);
 		if (body != null) {
 			return body.lines().map(Integer::valueOf);
