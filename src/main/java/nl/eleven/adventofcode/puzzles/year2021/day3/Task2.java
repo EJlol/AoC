@@ -2,7 +2,7 @@ package nl.eleven.adventofcode.puzzles.year2021.day3;
 
 import nl.eleven.adventofcode.Task;
 import nl.eleven.adventofcode.processors.CountItemsVertical;
-import nl.eleven.adventofcode.readers.TableReader;
+import nl.eleven.adventofcode.readers.CharacterTableReader;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -33,7 +33,7 @@ public class Task2 implements Task {
 	}
 
 	public int executeTask(Stream<String> inputStream) {
-		List<List<Character>> table = new TableReader().parse(inputStream).toList();
+		List<List<Character>> table = new CharacterTableReader().parse(inputStream).toList();
 
 		String o2 = findBit(table, (zero, one) -> zero > one);
 		String co2 = findBit(table, (zero, one) -> one >= zero);

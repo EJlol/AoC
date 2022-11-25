@@ -1,6 +1,5 @@
 package nl.eleven.adventofcode;
 
-import nl.eleven.adventofcode.readers.PuzzleReader;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
