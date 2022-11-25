@@ -2,7 +2,7 @@ package nl.eleven.adventofcode.puzzles.year2021.day3;
 
 import nl.eleven.adventofcode.Task;
 import nl.eleven.adventofcode.processors.CountItemsVertical;
-import nl.eleven.adventofcode.readers.CharacterReader;
+import nl.eleven.adventofcode.readers.TableReader;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -13,13 +13,11 @@ import java.util.stream.Stream;
 @Component("year2021day3task1")
 public class Task1 implements Task {
 
-	private static final String URL = "https://adventofcode.com/2021/day/3/input";
-
-	public int executeTask() {
-		Stream<List<Character>> stream = new CharacterReader().read(URL);
+	public int executeTask(Stream<String> inputStream) {
+		Stream<List<Character>> tableStream = new TableReader().parse(inputStream);
 
 		CountItemsVertical<Character> processor = new CountItemsVertical<>();
-		List<Map<Character, Integer>> counts = processor.process(stream);
+		List<Map<Character, Integer>> counts = processor.process(tableStream);
 
 		String gamma = counts.stream()
 				.map(characterCounts -> {

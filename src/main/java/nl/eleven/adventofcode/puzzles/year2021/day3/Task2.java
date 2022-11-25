@@ -2,18 +2,17 @@ package nl.eleven.adventofcode.puzzles.year2021.day3;
 
 import nl.eleven.adventofcode.Task;
 import nl.eleven.adventofcode.processors.CountItemsVertical;
-import nl.eleven.adventofcode.readers.CharacterReader;
+import nl.eleven.adventofcode.readers.TableReader;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiPredicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Component("year2021day3task2")
 public class Task2 implements Task {
-
-	private static final String URL = "https://adventofcode.com/2021/day/3/input";
 
 	private static final CountItemsVertical<Character> processor = new CountItemsVertical<>();
 
@@ -33,8 +32,8 @@ public class Task2 implements Task {
 		return table.get(0).stream().map(Object::toString).collect(Collectors.joining());
 	}
 
-	public int executeTask() {
-		List<List<Character>> table = new CharacterReader().read(URL).toList();
+	public int executeTask(Stream<String> inputStream) {
+		List<List<Character>> table = new TableReader().parse(inputStream).toList();
 
 		String o2 = findBit(table, (zero, one) -> zero > one);
 		String co2 = findBit(table, (zero, one) -> one >= zero);

@@ -1,6 +1,8 @@
 package nl.eleven.adventofcode;
 
+import java.util.stream.Stream;
+
 public interface Task {
 
-	int executeTask();
+	int executeTask(Stream<String> stream);
 }

@@ -15,7 +15,6 @@ public class AdventOfCodeController {
 
 	@GetMapping(path = "/year/{year}/day/{day}/task/{taskNumber}")
 	public int getTask(@PathVariable int year, @PathVariable int day, @PathVariable int taskNumber) {
-		Task task = taskService.getTask(year, day, taskNumber);
-		return task.executeTask();
+		return taskService.executeTask(year, day, taskNumber);
 	}
 }
