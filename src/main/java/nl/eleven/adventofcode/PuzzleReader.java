@@ -1,4 +1,4 @@
-package nl.eleven.adventofcode.readers;
+package nl.eleven.adventofcode;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class TableReader implements PuzzleReader {
+public class CharacterTableReader {
 
 	public Stream<List<Character>> parse(Stream<String> stream) {
 		List<List<Character>> table = new ArrayList<>();

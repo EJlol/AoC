@@ -2,7 +2,7 @@ package nl.eleven.adventofcode.puzzles.year2021.day3;
 
 import nl.eleven.adventofcode.Task;
 import nl.eleven.adventofcode.processors.CountItemsVertical;
-import nl.eleven.adventofcode.readers.TableReader;
+import nl.eleven.adventofcode.readers.CharacterTableReader;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 public class Task1 implements Task {
 
 	public int executeTask(Stream<String> inputStream) {
-		Stream<List<Character>> tableStream = new TableReader().parse(inputStream);
+		Stream<List<Character>> tableStream = new CharacterTableReader().parse(inputStream);
 
 		CountItemsVertical<Character> processor = new CountItemsVertical<>();
 		List<Map<Character, Integer>> counts = processor.process(tableStream);

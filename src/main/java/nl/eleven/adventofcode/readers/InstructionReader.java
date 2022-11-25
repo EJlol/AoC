@@ -4,7 +4,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.stream.Stream;
 
-public class InstructionReader<T> implements PuzzleReader {
+public class InstructionReader<T> {
 
 	public Stream<T> parse(Stream<String> stream, Class<T> clazz) {
 		try {
