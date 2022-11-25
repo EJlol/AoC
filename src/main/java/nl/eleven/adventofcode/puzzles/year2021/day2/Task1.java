@@ -5,16 +5,15 @@ import nl.eleven.adventofcode.readers.InstructionReader;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Stream;
 
 @Component("year2021day2task1")
 public class Task1 implements Task {
 
-	private static final String URL = "https://adventofcode.com/2021/day/2/input";
-
-	public int executeTask() {
+	public int executeTask(Stream<String> stream) {
 		AtomicInteger depth = new AtomicInteger();
 		AtomicInteger forwardDistance = new AtomicInteger();
-		new InstructionReader<Instruction>().read(URL, Instruction.class).forEach(instruction -> {
+		new InstructionReader<Instruction>().parse(stream, Instruction.class).forEach(instruction -> {
 			if (instruction.getCommand() == Command.UP) {
 				depth.addAndGet(-instruction.getDistance());
 			} else if (instruction.getCommand() == Command.DOWN) {

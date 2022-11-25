@@ -8,12 +8,7 @@ public class NumberReader implements PuzzleReader {
 		throw new UnsupportedOperationException();
 	}
 
-	public Stream<Integer> read(String url) {
-		String body = PuzzleReader.getPuzzleContent(url);
-		if (body != null) {
-			return body.lines().map(Integer::valueOf);
-		} else {
-			return Stream.empty();
-		}
+	public Stream<Integer> parse(Stream<String> stream) {
+		return stream.map(Integer::valueOf);
 	}
 }

@@ -5,14 +5,25 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.stream.Stream;
+
 public interface PuzzleReader {
 
-	static String getPuzzleContent(String url) {
+	static String getPuzzleContent(String url, String session) {
 		RestTemplate restTemplate = new RestTemplate();
 
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("Cookie", "session=53616c7465645f5f72378ff1d4d376c4d5dbc709d0eb6c0889b1ffe277795ab37a613ac8552511b5ef1630bb1935fbf94936ef54f2ceafd63ce156bfa8d9209c");
+		headers.add("Cookie", "session=" + session);
 
 		return restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<String>(headers), String.class).getBody();
+	}
+
+	static Stream<String> read(String url, String session) {
+		String body = PuzzleReader.getPuzzleContent(url, session);
+		if (body != null) {
+			return body.lines();
+		} else {
+			return Stream.empty();
+		}
 	}
 }

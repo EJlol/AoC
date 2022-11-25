@@ -6,12 +6,10 @@ import java.util.stream.Stream;
 
 public class InstructionReader<T> implements PuzzleReader {
 
-	public Stream<T> read(String url, Class<T> clazz) {
-		String body = PuzzleReader.getPuzzleContent(url);
-
+	public Stream<T> parse(Stream<String> stream, Class<T> clazz) {
 		try {
 			Constructor<T> constructor = clazz.getConstructor(String.class);
-			return body.lines().map(line -> {
+			return stream.map(line -> {
 				try {
 					return constructor.newInstance(line);
 				} catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {

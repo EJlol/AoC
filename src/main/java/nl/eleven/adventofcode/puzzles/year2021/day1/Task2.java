@@ -6,18 +6,17 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.stream.Stream;
 
 @Component("year2021day1task2")
 public class Task2 implements Task {
 
-	private static final String URL = "https://adventofcode.com/2021/day/1/input";
-
 	private static final int WINDOW_SIZE = 3;
 
-	public int executeTask() {
+	public int executeTask(Stream<String> stream) {
 		Deque<Integer> oldValues = new ArrayDeque<>();
 
-		return new NumberReader().read(URL)
+		return new NumberReader().parse(stream)
 				.reduce(0, (sum, value) -> {
 					int totalLastValues = oldValues.size() == WINDOW_SIZE ? oldValues.stream()
 							.reduce(0, Integer::sum) : Integer.MAX_VALUE;
