@@ -34,3 +34,6 @@ build/
 
 ### Secret properties ###
 /src/main/resources/application-secret.properties
+
+### Cache ###
+/src/main/resources/static/input/
