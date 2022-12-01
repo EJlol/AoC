@@ -4,7 +4,11 @@ import java.util.List;
 
 public class NumberMapper {
 
-	public List<Integer> map(List<String> input) {
+	private NumberMapper() {
+
+	}
+
+	public static List<Integer> map(List<String> input) {
 		return input.stream().map(Integer::valueOf).toList();
 	}
 }

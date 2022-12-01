@@ -13,7 +13,7 @@ public class Task1 implements Task {
 	@Override
 	public int executeTask(List<String> input) {
 		AtomicInteger oldValue = new AtomicInteger(Integer.MAX_VALUE);
-		return new NumberMapper().map(input)
+		return NumberMapper.map(input)
 				.stream()
 				.reduce(0, (sum, value) -> {
 					if (value > oldValue.get()) {
