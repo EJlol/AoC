@@ -1,19 +1,19 @@
 package nl.eleven.adventofcode.puzzles.year2021.day2;
 
 import nl.eleven.adventofcode.Task;
-import nl.eleven.adventofcode.readers.InstructionReader;
+import nl.eleven.adventofcode.mappers.InstructionMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Stream;
 
 @Component("year2021day2task1")
 public class Task1 implements Task {
 
-	public int executeTask(Stream<String> stream) {
+	public int executeTask(List<String> input) {
 		AtomicInteger depth = new AtomicInteger();
 		AtomicInteger forwardDistance = new AtomicInteger();
-		new InstructionReader<Instruction>().parse(stream, Instruction.class).forEach(instruction -> {
+		new InstructionMapper<Instruction>().map(input, Instruction.class).forEach(instruction -> {
 			if (instruction.getCommand() == Command.UP) {
 				depth.addAndGet(-instruction.getDistance());
 			} else if (instruction.getCommand() == Command.DOWN) {

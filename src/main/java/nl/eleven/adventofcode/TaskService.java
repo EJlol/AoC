@@ -3,15 +3,18 @@ package nl.eleven.adventofcode;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
-import java.util.stream.Stream;
+import java.util.List;
 
 @Service
 public class TaskService {
 
 	ApplicationContext context;
 
-	public TaskService(ApplicationContext context) {
+	PuzzleService puzzleService;
+
+	public TaskService(ApplicationContext context, PuzzleService puzzleService) {
 		this.context = context;
+		this.puzzleService = puzzleService;
 	}
 
 	int executeTask(int year, int day, int taskNumber) {
@@ -20,11 +23,8 @@ public class TaskService {
 			return 0;
 		}
 
-		String inputUrl = "https://adventofcode.com/" + year + "/day/" + day + "/input";
-		String session = "53616c7465645f5f72378ff1d4d376c4d5dbc709d0eb6c0889b1ffe277795ab37a613ac8552511b5ef1630bb1935fbf94936ef54f2ceafd63ce156bfa8d9209c";
-
-		Stream<String> stream = PuzzleReader.read(inputUrl, session);
-		return task.executeTask(stream);
+		List<String> puzzleInput = puzzleService.read(year, day);
+		return task.executeTask(puzzleInput);
 	}
 
 	Task getTask(int year, int day, int taskNumber) {
