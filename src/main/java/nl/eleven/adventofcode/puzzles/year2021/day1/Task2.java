@@ -16,7 +16,7 @@ public class Task2 implements Task {
 	public int executeTask(List<String> input) {
 		Deque<Integer> oldValues = new ArrayDeque<>();
 
-		return new NumberMapper().map(input)
+		return NumberMapper.map(input)
 				.stream()
 				.reduce(0, (sum, value) -> {
 					int totalLastValues = oldValues.size() == WINDOW_SIZE ? oldValues.stream()
