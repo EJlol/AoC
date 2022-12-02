@@ -23,7 +23,7 @@ public class PuzzleService {
 
 	Path path = Path.of("resources", "static", "input");
 
-	public PuzzleService(@Value("${sessionid}") String sessionId) {
+	public PuzzleService(@Value("${sessionId}") String sessionId) {
 		this.sessionId = sessionId;
 	}
 

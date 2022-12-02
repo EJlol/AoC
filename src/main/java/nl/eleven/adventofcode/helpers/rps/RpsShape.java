@@ -1,4 +1,4 @@
-package nl.eleven.adventofcode.rps;
+package nl.eleven.adventofcode.helpers.rps;
 
 public enum RpsShape {
 	ROCK,

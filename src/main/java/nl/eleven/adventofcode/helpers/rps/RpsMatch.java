@@ -1,23 +1,19 @@
-package nl.eleven.adventofcode.rps;
+package nl.eleven.adventofcode.helpers.rps;
 
 import java.util.EnumMap;
 import java.util.Map;
 
-import static nl.eleven.adventofcode.rps.RpsShape.PAPER;
-import static nl.eleven.adventofcode.rps.RpsShape.ROCK;
-import static nl.eleven.adventofcode.rps.RpsShape.SCISSORS;
-
 public class RpsMatch {
 	private final EnumMap<RpsShape, RpsShape> wins = new EnumMap<>(Map.of(
-			ROCK, SCISSORS,
-			PAPER, ROCK,
-			SCISSORS, ROCK
+			RpsShape.ROCK, RpsShape.SCISSORS,
+			RpsShape.PAPER, RpsShape.ROCK,
+			RpsShape.SCISSORS, RpsShape.PAPER
 	));
 
 	private final EnumMap<RpsShape, RpsShape> loses = new EnumMap<>(Map.of(
-			ROCK, PAPER,
-			PAPER, SCISSORS,
-			SCISSORS, ROCK
+			RpsShape.ROCK, RpsShape.PAPER,
+			RpsShape.PAPER, RpsShape.SCISSORS,
+			RpsShape.SCISSORS, RpsShape.ROCK
 	));
 
 	private final RpsShape you;
