@@ -1,9 +1,9 @@
 package nl.eleven.adventofcode.puzzles.year2021.day3;
 
 import nl.eleven.adventofcode.Task;
-import nl.eleven.adventofcode.groupingby.CountItems;
-import nl.eleven.adventofcode.table.CharacterTableMapper;
-import nl.eleven.adventofcode.table.Table;
+import nl.eleven.adventofcode.helpers.groupingby.CountItems;
+import nl.eleven.adventofcode.helpers.table.CharacterTableMapper;
+import nl.eleven.adventofcode.helpers.table.Table;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -23,8 +23,10 @@ public class Task2 implements Task {
 			CountItems<Character> processor = new CountItems<>();
 			List<Map<Character, Long>> counts = rotatedTable.contents().stream().map(processor::count).toList();
 
-			Map<Character, Long> columnCount = counts.get(position);
-			if (predicate.test(columnCount.get('0'), columnCount.get('1'))) {
+			Map<Character, Long> countsMap = counts.get(position);
+			Long zeroCount = countsMap.getOrDefault('0', 0L);
+			Long oneCount = countsMap.getOrDefault('1', 0L);
+			if (predicate.test(zeroCount, oneCount)) {
 				table = table.filterRows(binaryCode -> binaryCode.get(finalPosition).equals('0'));
 			} else {
 				table = table.filterRows(binaryCode -> binaryCode.get(finalPosition).equals('1'));
@@ -35,7 +37,7 @@ public class Task2 implements Task {
 	}
 
 	public int executeTask(List<String> input) {
-		Table<Character> table = CharacterTableMapper.map(input).rotate();
+		Table<Character> table = CharacterTableMapper.map(input);
 
 		String o2 = findBit(table, (zero, one) -> zero > one);
 		String co2 = findBit(table, (zero, one) -> one >= zero);

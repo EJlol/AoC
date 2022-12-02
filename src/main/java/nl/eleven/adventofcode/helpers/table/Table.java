@@ -1,6 +1,6 @@
-package nl.eleven.adventofcode.table;
+package nl.eleven.adventofcode.helpers.table;
 
-import nl.eleven.adventofcode.table.utils.RotateTable;
+import nl.eleven.adventofcode.helpers.table.utils.RotateTable;
 
 import java.util.List;
 import java.util.function.Predicate;

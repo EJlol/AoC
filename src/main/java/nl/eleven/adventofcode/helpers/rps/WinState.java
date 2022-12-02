@@ -1,4 +1,4 @@
-package nl.eleven.adventofcode.rps;
+package nl.eleven.adventofcode.helpers.rps;
 
 import java.util.Arrays;
 

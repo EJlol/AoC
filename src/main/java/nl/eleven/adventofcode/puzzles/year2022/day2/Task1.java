@@ -2,9 +2,9 @@ package nl.eleven.adventofcode.puzzles.year2022.day2;
 
 import nl.eleven.adventofcode.Task;
 import nl.eleven.adventofcode.inputmappers.InstructionMapper;
-import nl.eleven.adventofcode.rps.RpsMatch;
-import nl.eleven.adventofcode.rps.RpsShape;
-import nl.eleven.adventofcode.rps.WinState;
+import nl.eleven.adventofcode.helpers.rps.RpsMatch;
+import nl.eleven.adventofcode.helpers.rps.RpsShape;
+import nl.eleven.adventofcode.helpers.rps.WinState;
 import org.springframework.stereotype.Component;
 
 import java.util.EnumMap;
@@ -30,10 +30,10 @@ public class Task1 implements Task {
 	public int executeTask(List<String> input) {
 		List<Instruction> instructions = InstructionMapper.map(input, Instruction.class);
 		return instructions.stream().mapToInt(instruction -> {
-			RpsShape enemyShape = instruction.getLeft();
+			RpsShape opponentShape = instruction.getLeft();
 			RpsShape yourShape = instruction.getRight();
 
-			RpsMatch match = new RpsMatch(yourShape, enemyShape);
+			RpsMatch match = new RpsMatch(yourShape, opponentShape);
 			int shapeScore = scoresShape.get(yourShape);
 			int winScore = scoresWinState.get(match.getResult());
 			return shapeScore + winScore;
