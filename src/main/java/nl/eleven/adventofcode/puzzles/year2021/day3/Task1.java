@@ -1,8 +1,8 @@
 package nl.eleven.adventofcode.puzzles.year2021.day3;
 
 import nl.eleven.adventofcode.Task;
-import nl.eleven.adventofcode.mappers.CountItems;
-import nl.eleven.adventofcode.mappers.CharacterTableMapper;
+import nl.eleven.adventofcode.groupingby.CountItems;
+import nl.eleven.adventofcode.table.CharacterTableMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class Task1 implements Task {
 
 	public int executeTask(List<String> input) {
-		List<List<Character>> inputTable = new CharacterTableMapper().mapAndRotate(input);
+		List<List<Character>> inputTable = CharacterTableMapper.map(input).rotate().contents();
 
 		CountItems<Character> processor = new CountItems<>();
 		List<Map<Character, Long>> counts = inputTable.stream().map(processor::count).toList();

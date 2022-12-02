@@ -1,12 +1,15 @@
-package nl.eleven.adventofcode.mappers;
+package nl.eleven.adventofcode.inputmappers;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
-public class InstructionMapper<T> {
+public class InstructionMapper {
 
-	public List<T> map(List<String> input, Class<T> clazz) {
+	private InstructionMapper() {
+	}
+
+	public static <T> List<T> map(List<String> input, Class<T> clazz) {
 		try {
 			Constructor<T> constructor = clazz.getConstructor(String.class);
 			return input.stream().map(line -> {
