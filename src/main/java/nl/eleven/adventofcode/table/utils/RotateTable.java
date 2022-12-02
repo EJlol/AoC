@@ -1,11 +1,15 @@
-package nl.eleven.adventofcode.table;
+package nl.eleven.adventofcode.table.utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RotateTable<T> {
+public class RotateTable {
 
-	public List<List<T>> map(List<List<T>> inputTable) {
+	private RotateTable() {
+
+	}
+
+	public static <T> List<List<T>> rotate(List<List<T>> inputTable) {
 		List<List<T>> outputTable = new ArrayList<>();
 		for (int column = 0; column < inputTable.get(0).size(); column++) {
 			int finalColumn = column;

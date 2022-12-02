@@ -1,4 +1,4 @@
-package nl.eleven.adventofcode.mappers;
+package nl.eleven.adventofcode.inputmappers;
 
 import java.util.List;
 
