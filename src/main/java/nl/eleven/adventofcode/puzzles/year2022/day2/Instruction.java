@@ -1,6 +1,6 @@
 package nl.eleven.adventofcode.puzzles.year2022.day2;
 
-import nl.eleven.adventofcode.helpers.rps.RpsShape;
+import nl.eleven.adventofcode.models.rps.RpsShape;
 
 import java.util.Map;
 

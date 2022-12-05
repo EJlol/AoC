@@ -1,10 +1,10 @@
 package nl.eleven.adventofcode.puzzles.year2022.day2;
 
 import nl.eleven.adventofcode.Task;
-import nl.eleven.adventofcode.inputmappers.InstructionMapper;
-import nl.eleven.adventofcode.helpers.rps.RpsMatch;
-import nl.eleven.adventofcode.helpers.rps.RpsShape;
-import nl.eleven.adventofcode.helpers.rps.WinState;
+import nl.eleven.adventofcode.helpers.inputmappers.InstructionMapper;
+import nl.eleven.adventofcode.models.rps.RpsMatch;
+import nl.eleven.adventofcode.models.rps.RpsShape;
+import nl.eleven.adventofcode.models.rps.WinState;
 import org.springframework.stereotype.Component;
 
 import java.util.EnumMap;

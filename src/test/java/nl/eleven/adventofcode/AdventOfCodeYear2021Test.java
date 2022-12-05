@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @ActiveProfiles("secret")
-class AdventOfCodeApplicationTests {
+class AdventOfCodeYear2021Test {
 
 	@Autowired
 	PuzzleService puzzleService;
@@ -23,36 +23,24 @@ class AdventOfCodeApplicationTests {
 
 	@Test
 	void year2021day1() {
-		executeTask(2021, 1, 1, 1184);
-		executeTask(2021, 1, 2, 1158);
+		executeTask(1, 1, 1184);
+		executeTask(1, 2, 1158);
 	}
 
 	@Test
 	void year2021day2() {
-		executeTask(2021, 2, 1, 2039912);
-		executeTask(2021, 2, 2, 1942068080);
+		executeTask(2, 1, 2039912);
+		executeTask(2, 2, 1942068080);
 	}
 
 	@Test
 	void year2021day3() {
-		executeTask(2021, 3, 1, 2498354);
-		executeTask(2021, 3, 2, 3277956);
+		executeTask(3, 1, 2498354);
+		executeTask(3, 2, 3277956);
 	}
 
-	@Test
-	void year2022day1() {
-		executeTask(2022, 1, 1, 71502);
-		executeTask(2022, 1, 2, 208191);
-	}
-
-	@Test
-	void year2022day2() {
-		executeTask(2022, 2, 1, 12772);
-		executeTask(2022, 2, 2, 11618);
-	}
-
-	private void executeTask(int year, int day, int taskNumber, int answer) {
-		int result = taskService.executeTask(year, day, taskNumber);
+	private void executeTask(int day, int taskNumber, int answer) {
+		int result = taskService.executeTask(2021, day, taskNumber);
 		assertEquals(answer, result);
 	}
 }

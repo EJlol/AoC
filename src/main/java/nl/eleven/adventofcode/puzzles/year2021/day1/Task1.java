@@ -1,7 +1,7 @@
 package nl.eleven.adventofcode.puzzles.year2021.day1;
 
 import nl.eleven.adventofcode.Task;
-import nl.eleven.adventofcode.inputmappers.NumberMapper;
+import nl.eleven.adventofcode.helpers.inputmappers.NumberMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

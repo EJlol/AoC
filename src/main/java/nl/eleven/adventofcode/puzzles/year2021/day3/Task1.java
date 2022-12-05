@@ -1,8 +1,8 @@
 package nl.eleven.adventofcode.puzzles.year2021.day3;
 
 import nl.eleven.adventofcode.Task;
-import nl.eleven.adventofcode.helpers.groupingby.CountItems;
-import nl.eleven.adventofcode.helpers.table.CharacterTableMapper;
+import nl.eleven.adventofcode.helpers.list.groupingby.CountItems;
+import nl.eleven.adventofcode.models.table.CharacterTableMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
