@@ -1,4 +1,4 @@
-package nl.eleven.adventofcode.helpers.rps;
+package nl.eleven.adventofcode.models.rps;
 
 import java.util.EnumMap;
 import java.util.Map;

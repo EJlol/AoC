@@ -1,4 +1,4 @@
-package nl.eleven.adventofcode.helpers.table;
+package nl.eleven.adventofcode.models.table;
 
 import java.util.ArrayList;
 import java.util.List;

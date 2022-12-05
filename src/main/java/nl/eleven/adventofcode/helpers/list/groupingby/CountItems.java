@@ -1,4 +1,4 @@
-package nl.eleven.adventofcode.helpers.groupingby;
+package nl.eleven.adventofcode.helpers.list.groupingby;
 
 import java.util.List;
 import java.util.Map;

@@ -1,8 +1,8 @@
 package nl.eleven.adventofcode.puzzles.year2022.day1;
 
 import nl.eleven.adventofcode.Task;
-import nl.eleven.adventofcode.inputmappers.NumberMapper;
-import nl.eleven.adventofcode.inputmappers.utils.SplitByEmptyLinesMapper;
+import nl.eleven.adventofcode.helpers.inputmappers.NumberMapper;
+import nl.eleven.adventofcode.helpers.list.ListHelper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -16,8 +16,10 @@ public class Task1 implements Task {
 
 	@Override
 	public int executeTask(List<String> input) {
-		List<List<String>> splitInput = SplitByEmptyLinesMapper.split(input);
-		return splitInput.stream().mapToInt(Task1::sumInnerList).max().orElse(0);
+		return ListHelper.partitionByEmptyLines(input).stream()
+				.mapToInt(Task1::sumInnerList)
+				.max()
+				.orElse(0);
 	}
 
 }
