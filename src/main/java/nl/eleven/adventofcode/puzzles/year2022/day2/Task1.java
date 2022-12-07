@@ -1,10 +1,10 @@
 package nl.eleven.adventofcode.puzzles.year2022.day2;
 
-import nl.eleven.adventofcode.Task;
 import nl.eleven.adventofcode.helpers.inputmappers.InstructionMapper;
 import nl.eleven.adventofcode.models.rps.RpsMatch;
 import nl.eleven.adventofcode.models.rps.RpsShape;
 import nl.eleven.adventofcode.models.rps.WinState;
+import nl.eleven.adventofcode.tasks.IntegerTask;
 import org.springframework.stereotype.Component;
 
 import java.util.EnumMap;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @Component("year2022day2task1")
-public class Task1 implements Task {
+public class Task1 implements IntegerTask {
 
 	EnumMap<RpsShape, Integer> scoresShape = new EnumMap<>(Map.of(
 			RpsShape.ROCK, 1,

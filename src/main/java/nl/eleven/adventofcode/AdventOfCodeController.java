@@ -1,5 +1,6 @@
 package nl.eleven.adventofcode;
 
+import nl.eleven.adventofcode.tasks.TaskService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +15,7 @@ public class AdventOfCodeController {
 	}
 
 	@GetMapping(path = "/year/{year}/day/{day}/task/{taskNumber}")
-	public int getTask(@PathVariable int year, @PathVariable int day, @PathVariable int taskNumber) {
+	public String getTask(@PathVariable int year, @PathVariable int day, @PathVariable int taskNumber) {
 		return taskService.executeTask(year, day, taskNumber);
 	}
 }
