@@ -1,15 +1,15 @@
 package nl.eleven.adventofcode.puzzles.year2022.day3;
 
-import nl.eleven.adventofcode.Task;
 import nl.eleven.adventofcode.helpers.list.ListHelper;
 import nl.eleven.adventofcode.helpers.string.StringHelper;
+import nl.eleven.adventofcode.tasks.IntegerTask;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Set;
 
 @Component("year2022day3task2")
-public class Task2 implements Task {
+public class Task2 implements IntegerTask {
 
 	@Override
 	public int executeTask(List<String> input) {

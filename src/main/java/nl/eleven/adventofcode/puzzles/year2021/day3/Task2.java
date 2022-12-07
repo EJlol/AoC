@@ -1,9 +1,9 @@
 package nl.eleven.adventofcode.puzzles.year2021.day3;
 
-import nl.eleven.adventofcode.Task;
 import nl.eleven.adventofcode.helpers.list.groupingby.CountItems;
 import nl.eleven.adventofcode.models.table.CharacterTableMapper;
 import nl.eleven.adventofcode.models.table.Table;
+import nl.eleven.adventofcode.tasks.IntegerTask;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.function.BiPredicate;
 import java.util.stream.Collectors;
 
 @Component("year2021day3task2")
-public class Task2 implements Task {
+public class Task2 implements IntegerTask {
 
 	private static String findBit(Table<Character> table, BiPredicate<Long, Long> predicate) {
 		int position = 0;

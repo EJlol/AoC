@@ -1,15 +1,15 @@
 package nl.eleven.adventofcode.puzzles.year2022.day1;
 
-import nl.eleven.adventofcode.Task;
 import nl.eleven.adventofcode.helpers.inputmappers.NumberMapper;
 import nl.eleven.adventofcode.helpers.list.ListHelper;
+import nl.eleven.adventofcode.tasks.IntegerTask;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 import java.util.List;
 
 @Component("year2022day1task2")
-public class Task2 implements Task {
+public class Task2 implements IntegerTask {
 
 	private static final int LIMIT_SIZE = 3;
 

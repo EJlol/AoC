@@ -1,4 +1,4 @@
-package nl.eleven.adventofcode;
+package nl.eleven.adventofcode.puzzles;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;

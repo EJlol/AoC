@@ -1,5 +1,6 @@
-package nl.eleven.adventofcode;
+package nl.eleven.adventofcode.tasks;
 
+import nl.eleven.adventofcode.puzzles.PuzzleService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
@@ -17,14 +18,17 @@ public class TaskService {
 		this.puzzleService = puzzleService;
 	}
 
-	int executeTask(int year, int day, int taskNumber) {
+	public String executeTask(int year, int day, int taskNumber) {
 		Task task = getTask(year, day, taskNumber);
 		if (task == null) {
-			return 0;
+			return "Could not find task " + year + " " + day + " " + taskNumber;
 		}
 
+		System.out.println("Reading puzzle input...");
 		List<String> puzzleInput = puzzleService.read(year, day);
-		return task.executeTask(puzzleInput);
+
+		System.out.println("Executing task...");
+		return task.executeTaskAndReturnString(puzzleInput);
 	}
 
 	Task getTask(int year, int day, int taskNumber) {

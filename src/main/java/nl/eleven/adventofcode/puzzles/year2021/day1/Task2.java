@@ -1,7 +1,7 @@
 package nl.eleven.adventofcode.puzzles.year2021.day1;
 
-import nl.eleven.adventofcode.Task;
 import nl.eleven.adventofcode.helpers.inputmappers.NumberMapper;
+import nl.eleven.adventofcode.tasks.IntegerTask;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayDeque;
@@ -9,7 +9,7 @@ import java.util.Deque;
 import java.util.List;
 
 @Component("year2021day1task2")
-public class Task2 implements Task {
+public class Task2 implements IntegerTask {
 
 	private static final int WINDOW_SIZE = 3;
 
