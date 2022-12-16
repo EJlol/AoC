@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface Task {
 
-	String executeTaskAndReturnString(List<String> input);
+	String executeTaskAndReturnString(int taskNumber, List<String> input);
 }

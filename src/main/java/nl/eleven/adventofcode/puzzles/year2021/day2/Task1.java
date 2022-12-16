@@ -1,14 +1,14 @@
 package nl.eleven.adventofcode.puzzles.year2021.day2;
 
 import nl.eleven.adventofcode.helpers.inputmappers.InstructionMapper;
-import nl.eleven.adventofcode.tasks.IntegerTask;
+import nl.eleven.adventofcode.tasks.IntegerSingleTask;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Component("year2021day2task1")
-public class Task1 implements IntegerTask {
+public class Task1 implements IntegerSingleTask {
 
 	public int executeTask(List<String> input) {
 		AtomicInteger depth = new AtomicInteger();

@@ -21,7 +21,7 @@ public class PuzzleService {
 
 	private final String sessionId;
 
-	Path path = Path.of("resources", "static", "input");
+	Path path = Path.of("src", "main", "resources", "static", "input");
 
 	public PuzzleService(@Value("${sessionId}") String sessionId) {
 		this.sessionId = sessionId;
