@@ -28,11 +28,15 @@ public class TaskService {
 		List<String> puzzleInput = puzzleService.read(year, day);
 
 		System.out.println("Executing task...");
-		return task.executeTaskAndReturnString(puzzleInput);
+		return task.executeTaskAndReturnString(taskNumber, puzzleInput);
 	}
 
 	Task getTask(int year, int day, int taskNumber) {
 		String beanName = "year" + year + "day" + day + "task" + taskNumber;
+
+		if (!context.containsBean(beanName)) {
+			beanName = "year" + year + "day" + day;
+		}
 
 		if (!context.containsBean(beanName)) {
 			return null;

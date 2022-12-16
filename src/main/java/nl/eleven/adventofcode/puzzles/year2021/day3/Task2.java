@@ -3,7 +3,7 @@ package nl.eleven.adventofcode.puzzles.year2021.day3;
 import nl.eleven.adventofcode.helpers.list.groupingby.CountItems;
 import nl.eleven.adventofcode.models.table.CharacterTableMapper;
 import nl.eleven.adventofcode.models.table.Table;
-import nl.eleven.adventofcode.tasks.IntegerTask;
+import nl.eleven.adventofcode.tasks.IntegerSingleTask;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.function.BiPredicate;
 import java.util.stream.Collectors;
 
 @Component("year2021day3task2")
-public class Task2 implements IntegerTask {
+public class Task2 implements IntegerSingleTask {
 
 	private static String findBit(Table<Character> table, BiPredicate<Long, Long> predicate) {
 		int position = 0;
