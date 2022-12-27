@@ -1,4 +1,4 @@
-package nl.eleven.adventofcode.models;
+package nl.eleven.adventofcode.models.position;
 
 public record Position(int x, int y) {
 
@@ -17,6 +17,15 @@ public record Position(int x, int y) {
 	public static final Position WEST = new Position(-1, 0);
 
 	public static final Position NORTHWEST = new Position(-1, -1);
+
+	public static Position fromString(String stringPosition) {
+		String[] splitString = stringPosition.split(",");
+		return new Position(Integer.parseInt(splitString[0]), Integer.parseInt(splitString[1]));
+	}
+
+	public int manhattanDistance(Position other) {
+		return Math.abs(this.x() - other.x()) + Math.abs(this.y() - other.y());
+	}
 
 	public Position min(Position other) {
 		return new Position(x() - other.x(), y() - other.y());

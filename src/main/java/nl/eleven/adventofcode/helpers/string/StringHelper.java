@@ -36,4 +36,8 @@ public class StringHelper {
 		}
 		return new SimplePair<>(partitions.get(0), partitions.get(1));
 	}
+
+	public static List<String> splitAtString(String input, String splitString) {
+		return Lists.newArrayList(input.split(Pattern.quote(splitString)));
+	}
 }
