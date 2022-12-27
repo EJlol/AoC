@@ -2,7 +2,7 @@ package nl.eleven.adventofcode.models.table;
 
 import com.google.common.collect.Lists;
 import nl.eleven.adventofcode.helpers.list.ListHelper;
-import nl.eleven.adventofcode.models.Position;
+import nl.eleven.adventofcode.models.position.Position;
 import nl.eleven.adventofcode.models.table.utils.RotateTable;
 
 import java.util.ArrayList;

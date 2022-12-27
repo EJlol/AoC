@@ -1,6 +1,6 @@
 package nl.eleven.adventofcode.puzzles.year2022.day12_climbing;
 
-import nl.eleven.adventofcode.models.Position;
+import nl.eleven.adventofcode.models.position.Position;
 
 import java.util.ArrayList;
 import java.util.List;

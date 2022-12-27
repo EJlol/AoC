@@ -1,6 +1,6 @@
 package nl.eleven.adventofcode.puzzles.year2022.day12_climbing;
 
-import nl.eleven.adventofcode.models.Position;
+import nl.eleven.adventofcode.models.position.Position;
 import nl.eleven.adventofcode.models.table.CharacterTableMapper;
 import nl.eleven.adventofcode.models.table.Table;
 import nl.eleven.adventofcode.tasks.StringDoubleTask;
@@ -93,10 +93,9 @@ public class Task implements StringDoubleTask {
 		return currentNode;
 	}
 
-	private Node[][] generateMap(Table<Character> table, BiPredicate<Node, Node> fn) {
+	private void generateMap(Table<Character> table, BiPredicate<Node, Node> fn) {
 		Node[][] map = new Node[table.getWidth()][table.getHeight()];
 		table.mapCellsToArray((c, p) -> generateNode(map, c, p, fn), map);
-		return map;
 	}
 
 	private Node generateNode(Node[][] map, Character c, Position position, BiPredicate<Node, Node> fn) {

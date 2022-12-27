@@ -1,6 +1,6 @@
 package nl.eleven.adventofcode.puzzles.year2022.day9_ropebridge;
 
-import nl.eleven.adventofcode.models.Position;
+import nl.eleven.adventofcode.models.position.Position;
 import nl.eleven.adventofcode.tasks.IntegerDoubleTask;
 import org.springframework.stereotype.Component;
 

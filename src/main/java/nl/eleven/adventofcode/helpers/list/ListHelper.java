@@ -1,6 +1,7 @@
 package nl.eleven.adventofcode.helpers.list;
 
 import com.google.common.collect.Lists;
+import nl.eleven.adventofcode.models.pair.SimplePair;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -43,6 +44,11 @@ public class ListHelper {
 
 	public static List<List<String>> partitionByStartsWith(List<String> input, String prefix) {
 		return partitionBy(input, line -> line.startsWith(prefix), true);
+	}
+
+	public static List<SimplePair<String>> partitionInTwoByEmptyLine(List<String> input) {
+		List<List<String>> partitions = partitionByEmptyLines(input);
+		return partitions.stream().map(innerList -> new SimplePair<>(innerList.get(0), innerList.get(1))).toList();
 	}
 
 	public static <T> List<T> reverse(List<T> list) {
