@@ -1,6 +1,7 @@
 package nl.eleven.adventofcode.puzzles.year2022.day11_monkeyinthemiddle;
 
-import nl.eleven.adventofcode.tasks.StringDoubleTask;
+import nl.eleven.adventofcode.helpers.list.ListHelper;
+import nl.eleven.adventofcode.tasks.TaskInterface;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Component("year2022day11")
-public class Task implements StringDoubleTask {
+public class Task implements TaskInterface<Long> {
 
 	ArrayList<Monkey> monkeys = new ArrayList<>();
 
@@ -17,23 +18,24 @@ public class Task implements StringDoubleTask {
 	}
 
 	@Override
-	public String executeTask1(List<String> input) {
-		playGame(20, true);
-		return "";
+	public Long executeTask1(List<String> input) {
+		return playGame(20, true);
 	}
 
 	@Override
-	public String executeTask2(List<String> input) {
-		playGame(10_000, false);
-		return "";
+	public Long executeTask2(List<String> input) {
+		return playGame(10_000, false);
 	}
 
-	public void playGame(int rounds, boolean withWorry) {
+	public long playGame(int rounds, boolean withWorry) {
 		prepareMonkeys();
 		for (int i = 0; i < rounds; i++) {
 			doRound(withWorry);
 		}
-		monkeys.forEach(Monkey::printResult);
+		List<Integer> totalInspectedItems = ListHelper.max(monkeys.stream()
+				.map(Monkey::getTotalInspectedItems)
+				.toList(), 2);
+		return (long) totalInspectedItems.get(0) * (long) totalInspectedItems.get(1);
 	}
 
 	private void prepareMonkeys() {

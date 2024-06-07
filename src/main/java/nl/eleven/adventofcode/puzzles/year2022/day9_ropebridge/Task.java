@@ -1,7 +1,7 @@
 package nl.eleven.adventofcode.puzzles.year2022.day9_ropebridge;
 
 import nl.eleven.adventofcode.models.position.Position;
-import nl.eleven.adventofcode.tasks.IntegerDoubleTask;
+import nl.eleven.adventofcode.tasks.TaskInterface;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Set;
 
 @Component("year2022day9")
-public class Task implements IntegerDoubleTask {
+public class Task implements TaskInterface<Integer> {
 
 	Map<Position, Position> lookupTable = Map.ofEntries(
 			// West
@@ -41,8 +41,7 @@ public class Task implements IntegerDoubleTask {
 			Map.entry(new Position(2, 2), Position.SOUTHEAST)
 	);
 
-	Position snakeHead = new Position(0, 0);
-
+	Position snakeHead;
 	List<Position> snakeTail;
 
 	private static List<Position> initializeSnakeTail(int tailLength) {
@@ -54,20 +53,20 @@ public class Task implements IntegerDoubleTask {
 	}
 
 	@Override
-	public int executeTask1(List<String> input) {
+	public Integer executeTask1(List<String> input) {
 		int snakeLength = 1;
 		return simulateSnake(input, snakeLength);
 	}
 
 	@Override
-	public int executeTask2(List<String> input) {
+	public Integer executeTask2(List<String> input) {
 		int snakeLength = 9;
 		return simulateSnake(input, snakeLength);
 	}
 
 	private Position getTailMovement(Position currentPart, Position withPreviousPart) {
 		Position relativePositionOfHead = withPreviousPart.min(currentPart);
-		return lookupTable.get(relativePositionOfHead);
+		return lookupTable.getOrDefault(relativePositionOfHead, Position.ZERO);
 	}
 
 	private void moveSnake(Position direction) {

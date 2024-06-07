@@ -1,21 +1,21 @@
 package nl.eleven.adventofcode.puzzles.year2022.day7_nospaceleftondevice;
 
-import nl.eleven.adventofcode.helpers.list.ListHelper;
-import nl.eleven.adventofcode.tasks.IntegerDoubleTask;
+import nl.eleven.adventofcode.helpers.list.PartitionListBy;
+import nl.eleven.adventofcode.tasks.TaskInterface;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Component("year2022day7")
-public class Task implements IntegerDoubleTask {
+public class Task implements TaskInterface<Integer> {
 
 	DirectoryStructure root = new DirectoryStructure("/", null);
 
 	DirectoryStructure currentDirectory = root;
 
 	@Override
-	public int executeTask1(List<String> input) {
+	public Integer executeTask1(List<String> input) {
 		List<DirectoryStructure> allDirectories = parseFileStructure(input);
 
 		return allDirectories.stream()
@@ -24,7 +24,7 @@ public class Task implements IntegerDoubleTask {
 	}
 
 	@Override
-	public int executeTask2(List<String> input) {
+	public Integer executeTask2(List<String> input) {
 		List<DirectoryStructure> allDirectories = parseFileStructure(input);
 
 		int totalDiskSpace = 70_000_000;
@@ -44,13 +44,13 @@ public class Task implements IntegerDoubleTask {
 	}
 
 	public List<DirectoryStructure> parseFileStructure(List<String> input) {
-		List<List<String>> commands = ListHelper.partitionByStartsWith(input, "$");
+		List<List<String>> commands = PartitionListBy.startsWith(input, "$");
 		commands.forEach(terminalBlockText -> {
 			if (terminalBlockText.isEmpty()) {
 				return;
 			}
 
-			String[] params = terminalBlockText.get(0).split(" ");
+			String[] params = terminalBlockText.getFirst().split(" ");
 			String command = params[1];
 			if (command.equals("cd")) {
 				changeDirectory(params);
@@ -81,7 +81,7 @@ public class Task implements IntegerDoubleTask {
 	}
 
 	private void list(List<String> terminalBlockText) {
-		terminalBlockText.remove(0);
+		terminalBlockText.removeFirst();
 		terminalBlockText.forEach(line -> {
 			if (line.startsWith("dir ")) {
 				currentDirectory.addChild(new DirectoryStructure(line.substring(4), currentDirectory));

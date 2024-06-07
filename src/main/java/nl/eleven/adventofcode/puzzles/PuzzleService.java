@@ -1,11 +1,14 @@
 package nl.eleven.adventofcode.puzzles;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.BufferedWriter;
@@ -18,6 +21,8 @@ import java.util.List;
 
 @Service
 public class PuzzleService {
+
+	private static final Logger logger = LoggerFactory.getLogger(PuzzleService.class);
 
 	private final String sessionId;
 
@@ -32,17 +37,17 @@ public class PuzzleService {
 
 		try {
 			if (Files.exists(filename)) {
-				System.out.println("Reading from cache");
+				logger.info("Reading from cache");
 				return Files.readAllLines(filename);
 			} else {
 				String body = retrievePuzzleContentFromUrl(year, day);
-				System.out.println("Writing file...");
+				logger.info("Writing file...");
 				Files.write(filename, body.getBytes());
-				System.out.println("Ok!");
+				logger.info("Ok!");
 				return body.lines().toList();
 			}
 		} catch (IOException e) {
-			System.out.println(e.getMessage());
+			logger.error(e.getMessage());
 		}
 
 		return new ArrayList<>();
@@ -56,21 +61,26 @@ public class PuzzleService {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Cookie", "session=" + this.sessionId);
 
-		ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<String>(headers), String.class);
-		String puzzleContent = response.getBody();
+		try {
+			ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<String>(headers), String.class);
+			String puzzleContent = response.getBody();
 
-		if (response.getStatusCode().is2xxSuccessful() && puzzleContent != null && checkPathExists()) {
-			Path filename = path.resolve("year")
-					.resolve(String.valueOf(year))
-					.resolve("day")
-					.resolve(String.valueOf(day));
-			try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename.toFile()))) {
-				writer.write(puzzleContent);
-			} catch (IOException ignored) {
+			if (response.getStatusCode().is2xxSuccessful() && puzzleContent != null && checkPathExists()) {
+				Path filename = path.resolve("year")
+						.resolve(String.valueOf(year))
+						.resolve("day")
+						.resolve(String.valueOf(day));
+				try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename.toFile()))) {
+					writer.write(puzzleContent);
+				} catch (IOException e) {
+					logger.error(e.getMessage());
+				}
 			}
-		}
 
-		return puzzleContent;
+			return puzzleContent;
+		} catch (RestClientException e) {
+			throw new CouldNotRetrievePuzzleInputException(e.getMessage());
+		}
 	}
 
 	private boolean checkPathExists() {

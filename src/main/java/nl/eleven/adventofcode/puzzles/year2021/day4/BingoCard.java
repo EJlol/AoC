@@ -1,6 +1,6 @@
 package nl.eleven.adventofcode.puzzles.year2021.day4;
 
-import nl.eleven.adventofcode.models.Position;
+import nl.eleven.adventofcode.models.position.Position;
 import nl.eleven.adventofcode.models.table.Table;
 
 public class BingoCard {

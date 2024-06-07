@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Hello, world!</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<link rel="icon" href="favicon.png">
+	<script src="http://localhost:35729/livereload.js"></script>
+</head>
+<body>
+
+<header>
+	<h1>AoC</h1>
+</header>
+
+<main>
+	<section>
+
+		<a href="/new">Create new task</a>
+		<ul>
+			<th:block th:each="task, iter : ${tasks}">
+				<li th:if="${iter.first}">
+					<b th:text="${task.year()}" />
+				</li>
+				<li>
+					<a th:href="${task.urlTask1()}" th:text="${task.year()} + ' - Day ' + ${task.day()} + ' - Task 1'" />
+				</li>
+				<li>
+					<a th:href="${task.urlTask2()}" th:text="${task.year()} + ' - Day ' + ${task.day()} + ' - Task 2'" />
+				</li>
+				<th:block th:unless="${iter.last}">
+					<li th:unless="${tasks[iter.index + 1].year() == task.year()}">
+						<b th:text="${tasks[iter.index + 1].year()}" />
+					</li>
+				</th:block>
+			</th:block>
+		</ul>
+	</section>
+</main>
+
+<footer></footer>
+
+</body>
+</html>

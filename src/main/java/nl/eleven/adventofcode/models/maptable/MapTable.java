@@ -1,7 +1,8 @@
 package nl.eleven.adventofcode.models.maptable;
 
+import nl.eleven.adventofcode.helpers.PositionHelper;
 import nl.eleven.adventofcode.models.position.Position;
-import nl.eleven.adventofcode.models.position.PositionHelper;
+import org.slf4j.Logger;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,6 +10,8 @@ import java.util.function.BiConsumer;
 import java.util.stream.Stream;
 
 public class MapTable<T> {
+
+	private static final Logger logger = org.slf4j.LoggerFactory.getLogger(MapTable.class);
 
 	int floorHeight = 0;
 
@@ -31,16 +34,16 @@ public class MapTable<T> {
 			y2 = floorHeight + 3;
 		}
 
-		for (int y = y1; y < y2; y++) {
-			for (int x = x1; x < x2; x++) {
+		for (int y = y1; y <= y2; y++) {
+			for (int x = x1; x <= x2; x++) {
 				T o = map.get(new Position(x, y));
 				if (floorValue != null && y >= floorHeight) {
 					o = floorValue;
 				}
 
-				System.out.print(o != null ? o.toString().charAt(0) : '.');
+				logger.debug(Character.toString(o != null ? o.toString().charAt(0) : '.'));
 			}
-			System.out.println();
+			logger.debug("");
 		}
 	}
 
@@ -91,6 +94,10 @@ public class MapTable<T> {
 		return y2 - y1;
 	}
 
+	public T getOrDefault(Position p, T value) {
+		return map.getOrDefault(p, value);
+	}
+
 	public T getOrDefault(int x, int y, T value) {
 		return map.getOrDefault(new Position(x, y), value);
 	}
@@ -125,6 +132,10 @@ public class MapTable<T> {
 	public void setFloorHeight(int y, T value) {
 		this.floorHeight = y;
 		this.floorValue = value;
+	}
+
+	public int size() {
+		return map.size();
 	}
 
 	public Stream<T> stream() {

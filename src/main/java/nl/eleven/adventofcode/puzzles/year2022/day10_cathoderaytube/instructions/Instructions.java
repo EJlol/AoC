@@ -1,11 +1,11 @@
 package nl.eleven.adventofcode.puzzles.year2022.day10_cathoderaytube.instructions;
 
-import nl.eleven.adventofcode.models.cpu.Cpu;
 import nl.eleven.adventofcode.models.cpu.Instruction;
+import nl.eleven.adventofcode.models.cpu.RegisterInterface;
 
 import java.util.List;
 
-public enum Instructions implements Instruction {
+public enum Instructions implements Instruction<String> {
 
 	NOOP(1, "noop"),
 	ADDX(2, "addx");
@@ -20,10 +20,10 @@ public enum Instructions implements Instruction {
 	}
 
 	@Override
-	public void execute(Cpu cpu, List<String> parameters) {
+	public void execute(RegisterInterface registerInterface, List<String> parameters) {
 		if (this == Instructions.ADDX) {
-			int addValue = Integer.parseInt(parameters.get(0));
-			cpu.addToRegister(0, addValue);
+			int addValue = Integer.parseInt(parameters.getFirst());
+			registerInterface.addRegister(0, addValue);
 		}
 	}
 

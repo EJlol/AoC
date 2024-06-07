@@ -41,8 +41,8 @@ public class Monkey {
 		}
 	}
 
-	public void printResult() {
-		System.out.println(totalInspectedItems);
+	public int getTotalInspectedItems() {
+		return totalInspectedItems;
 	}
 
 	private void addItem(long value) {

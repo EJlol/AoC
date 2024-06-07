@@ -1,5 +1,7 @@
 package nl.eleven.adventofcode.models.position;
 
+import java.util.List;
+
 public record Position3D(int x, int y, int z) {
 
 	public static final Position3D NORTH = new Position3D(0, -1, 0);
@@ -25,6 +27,17 @@ public record Position3D(int x, int y, int z) {
 	public static Position3D fromString(String stringPosition) {
 		String[] splitString = stringPosition.split(",");
 		return new Position3D(Integer.parseInt(splitString[0]), Integer.parseInt(splitString[1]), Integer.parseInt(splitString[2]));
+	}
+
+	public List<Position3D> getNeighbours() {
+		return List.of(
+				this.plus(Position3D.NORTH),
+				this.plus(Position3D.SOUTH),
+				this.plus(Position3D.EAST),
+				this.plus(Position3D.WEST),
+				this.plus(Position3D.FORWARDS),
+				this.plus(Position3D.BACKWARDS)
+		);
 	}
 
 	public int manhattanDistance(Position3D other) {

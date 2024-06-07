@@ -2,22 +2,22 @@ package nl.eleven.adventofcode.puzzles.year2022.day10_cathoderaytube;
 
 import nl.eleven.adventofcode.models.cpu.Cpu;
 import nl.eleven.adventofcode.puzzles.year2022.day10_cathoderaytube.instructions.CpuImpl;
-import nl.eleven.adventofcode.tasks.StringDoubleTask;
+import nl.eleven.adventofcode.tasks.TaskInterface;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component("year2022day10")
-public class Task implements StringDoubleTask {
+public class Task implements TaskInterface<String> {
 
-	private static boolean isRendering(Cpu cpu) {
+	private static boolean isRendering(Cpu<String> cpu) {
 		return (cpu.getCycleCount() % 40) >= cpu.getRegisterValue(0) &&
 				(cpu.getCycleCount() % 40) <= cpu.getRegisterValue(0) + 2;
 	}
 
 	@Override
 	public String executeTask1(List<String> input) {
-		Cpu cpu = new CpuImpl(input);
+		Cpu<String> cpu = new CpuImpl(input);
 		int sum = 0;
 		while (!cpu.shouldStop()) {
 			cpu.doCycle();
@@ -25,12 +25,12 @@ public class Task implements StringDoubleTask {
 				sum += cpu.getCycleCount() * cpu.getRegisterValue(0);
 			}
 		}
-		return "" + sum;
+		return Integer.toString(sum);
 	}
 
 	@Override
 	public String executeTask2(List<String> input) {
-		Cpu cpu = new CpuImpl(input);
+		Cpu<String> cpu = new CpuImpl(input);
 		StringBuilder builder = new StringBuilder();
 		while (!cpu.shouldStop()) {
 			cpu.doCycle();
