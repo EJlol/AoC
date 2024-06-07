@@ -2,11 +2,12 @@ package nl.eleven.adventofcode.models.cpu;
 
 import java.util.List;
 
-public interface Instruction {
+public interface Instruction<S> {
 
-	void execute(Cpu cpu, List<String> parameters);
+	void execute(RegisterInterface registers, List<S> parameters);
 
 	int getCycles();
 
 	String getInstructionName();
+
 }

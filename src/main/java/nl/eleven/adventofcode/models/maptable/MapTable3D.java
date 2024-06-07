@@ -1,12 +1,14 @@
 package nl.eleven.adventofcode.models.maptable;
 
+import nl.eleven.adventofcode.helpers.Position3DHelper;
 import nl.eleven.adventofcode.models.position.Position3D;
-import nl.eleven.adventofcode.models.position.Position3DHelper;
+import nl.eleven.adventofcode.models.rect.Cuboid;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.function.BiConsumer;
 import java.util.stream.Stream;
 
@@ -44,7 +46,33 @@ public class MapTable3D<T> {
 		}
 	}
 
+	/**
+	 * Fills the outside of the 3D map with a specified value.
+	 * This method first calculates the boundaries of the 3D map by finding the furthest coordinates in each direction.
+	 * It then starts from a position outside these boundaries and performs a breadth-first search (BFS), filling each unoccupied position with the specified value.
+	 * The BFS stops when it has visited all positions within the calculated boundaries.
+	 *
+	 * @param value The value to fill the outside of the 3D map with.
+	 */
 	public void fillOutside(T value) {
+		Cuboid boundaries = findBoundaries();
+
+		Queue<Position3D> queue = new LinkedList<>();
+		queue.add(new Position3D(boundaries.getX(), boundaries.getY(), boundaries.getZ()));
+
+		while (!queue.isEmpty()) {
+			Position3D p = queue.poll();
+			if (p.x() >= boundaries.getX() && p.x() <= boundaries.getX() + boundaries.getWidth() &&
+					p.y() >= boundaries.getY() && p.y() <= boundaries.getY() + boundaries.getHeight() &&
+					p.z() >= boundaries.getZ() && p.z() <= boundaries.getZ() + boundaries.getDepth() &&
+					!map.containsKey(p)) {
+				plot(p, value);
+				queue.addAll(p.getNeighbours());
+			}
+		}
+	}
+
+	public Cuboid findBoundaries() {
 		List<Position3D> positions = map.keySet().stream().toList();
 		int x1 = Position3DHelper.findFurthestWestCoordinate(positions) - 2;
 		int x2 = Position3DHelper.findFurthestEastCoordinate(positions) + 2;
@@ -53,24 +81,11 @@ public class MapTable3D<T> {
 		int z1 = Position3DHelper.findFurthestBackwardsCoordinate(positions) - 2;
 		int z2 = Position3DHelper.findFurthestForwardsCoordinate(positions) + 2;
 
-		List<Position3D> queue = new ArrayList<>();
-		queue.add(new Position3D(x1, y1, z1));
+		int width = x2 - x1;
+		int height = y2 - y1;
+		int depth = z2 - z1;
 
-		while (!queue.isEmpty()) {
-			Position3D p = queue.remove(0);
-			if (p.x() >= x1 && p.x() <= x2 &&
-					p.y() >= y1 && p.y() <= y2 &&
-					p.z() >= z1 && p.z() <= z2 &&
-					!map.containsKey(p)) {
-				plot(p, value);
-				queue.add(p.plus(Position3D.NORTH));
-				queue.add(p.plus(Position3D.SOUTH));
-				queue.add(p.plus(Position3D.WEST));
-				queue.add(p.plus(Position3D.EAST));
-				queue.add(p.plus(Position3D.FORWARDS));
-				queue.add(p.plus(Position3D.BACKWARDS));
-			}
-		}
+		return new Cuboid(x1, y1, z1, width, height, depth);
 	}
 
 	public void forEach(BiConsumer<? super Position3D, ? super T> consumer) {
@@ -114,10 +129,6 @@ public class MapTable3D<T> {
 
 	public void plot(Position3D p, T value) {
 		map.put(p, value);
-	}
-
-	public Stream<T> stream() {
-		return map.values().stream();
 	}
 
 	public Stream<Map.Entry<Position3D, T>> streamEntries() {

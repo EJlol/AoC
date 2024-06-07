@@ -1,9 +1,9 @@
 package nl.eleven.adventofcode.puzzles.year2022.day5_supplystacks;
 
-import nl.eleven.adventofcode.helpers.list.ListHelper;
-import nl.eleven.adventofcode.helpers.string.StringHelper;
+import nl.eleven.adventofcode.helpers.list.PartitionListBy;
+import nl.eleven.adventofcode.helpers.string.StringSplitter;
 import nl.eleven.adventofcode.models.table.Table;
-import nl.eleven.adventofcode.tasks.StringDoubleTask;
+import nl.eleven.adventofcode.tasks.TaskInterface;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -11,10 +11,10 @@ import java.util.Stack;
 import java.util.stream.Collectors;
 
 @Component("year2022day5")
-public class Task implements StringDoubleTask {
+public class Task implements TaskInterface<String> {
 
 	public String executeTask(List<String> input, boolean reverse) {
-		List<List<String>> inputs = ListHelper.partitionByEmptyLines(input);
+		List<List<String>> inputs = PartitionListBy.emptyLines(input);
 		List<String> stackInput = inputs.get(0);
 
 		List<String> instructionsInput = inputs.get(1);
@@ -44,7 +44,7 @@ public class Task implements StringDoubleTask {
 		});
 
 		instructionsInput.forEach(instruction -> {
-			List<String> params = StringHelper.splitAtCharacter(instruction, ' ');
+			List<String> params = StringSplitter.splitAtCharacter(instruction, ' ');
 			int amount = Integer.parseInt(params.get(1));
 			int startPosition = Integer.parseInt(params.get(3)) - 1;
 			int destinationPosition = Integer.parseInt(params.get(5)) - 1;

@@ -1,28 +1,31 @@
 package nl.eleven.adventofcode.models.cpu;
 
-import nl.eleven.adventofcode.helpers.string.StringHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public abstract class Cpu {
+public abstract class Cpu<S> implements RegisterInterface {
+
+	private static final Logger logger = LoggerFactory.getLogger(Cpu.class);
+
+	private final List<S> program;
 
 	private final Map<Integer, Integer> registers;
 
 	private int busyCycleCount;
 
-	private Instruction busyInstruction;
+	private Instruction<S> busyInstruction;
 
-	private List<String> busyInstructionParameters;
+	private List<S> busyInstructionParameters;
 
 	private int cycleCount;
 
-	private final List<String> program;
-
 	private int programCounter;
 
-	protected Cpu(List<String> program) {
+	protected Cpu(List<S> program) {
 		this.program = program;
 		programCounter = 0;
 
@@ -34,12 +37,12 @@ public abstract class Cpu {
 		registers = initializeRegisters();
 	}
 
-	public void addToRegister(int registerIndex, int value) {
-		registers.compute(registerIndex, (k, oldValue) -> oldValue == null ? value : oldValue + value);
+	public void addRegister(int registerIndex, int value) {
+		registers.put(registerIndex, registers.getOrDefault(registerIndex, 0) + value);
 	}
 
 	public void debug() {
-		System.out.println(cycleCount + ": PC[" + programCounter + "] - " + (busyInstruction != null ? busyInstruction.getInstructionName() : "null"));
+		logger.debug("%d: PC[%d] - %s".formatted(cycleCount, programCounter, busyInstruction != null ? busyInstruction.getInstructionName() : "null"));
 	}
 
 	public void doCycle() {
@@ -49,12 +52,12 @@ public abstract class Cpu {
 				busyInstruction.execute(this, busyInstructionParameters);
 			}
 
-			String line = program.get(programCounter);
+			S line = program.get(programCounter);
+			List<S> parameters = getParametersForLine(line);
 			programCounter++;
 
-			List<String> parameters = StringHelper.splitAtCharacter(line, ' ');
-			busyInstruction = getInstruction(parameters.get(0));
-			parameters.remove(0);
+			busyInstruction = getInstruction(parameters.getFirst());
+			parameters.removeFirst();
 			busyInstructionParameters = parameters;
 			busyCycleCount = busyInstruction.getCycles();
 		}
@@ -66,9 +69,11 @@ public abstract class Cpu {
 		return cycleCount;
 	}
 
-	public abstract Instruction getInstruction(String instruction);
+	public abstract Instruction<S> getInstruction(S instruction);
 
-	public List<String> getProgram() {
+	public abstract List<S> getParametersForLine(S line);
+
+	public List<S> getProgram() {
 		return program;
 	}
 

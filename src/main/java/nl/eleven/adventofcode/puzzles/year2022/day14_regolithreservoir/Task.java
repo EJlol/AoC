@@ -1,25 +1,25 @@
 package nl.eleven.adventofcode.puzzles.year2022.day14_regolithreservoir;
 
-import nl.eleven.adventofcode.helpers.string.StringHelper;
+import nl.eleven.adventofcode.helpers.string.StringSplitter;
 import nl.eleven.adventofcode.models.maptable.MapTable;
 import nl.eleven.adventofcode.models.position.Position;
-import nl.eleven.adventofcode.tasks.IntegerDoubleTask;
+import nl.eleven.adventofcode.tasks.TaskInterface;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.function.Predicate;
 
 @Component("year2022day14")
-public class Task implements IntegerDoubleTask {
+public class Task implements TaskInterface<Integer> {
 
 	MapTable<Materials> map = null;
 
 	private static MapTable<Materials> initializeMap(List<String> input) {
 		MapTable<Materials> map = new MapTable<>();
 		input.forEach(lineInput -> {
-			List<String> positionInputs = StringHelper.splitAtString(lineInput, " -> ");
+			List<String> positionInputs = StringSplitter.splitAtString(lineInput, " -> ");
 			List<Position> positions = positionInputs.stream().map(Position::fromString).toList();
-			Position lastPosition = positions.get(0);
+			Position lastPosition = positions.getFirst();
 			for (int i = 1; i < positions.size(); i++) {
 				map.drawLine(lastPosition.x(), lastPosition.y(), positions.get(i).x(), positions.get(i)
 						.y(), Materials.ROCK);
@@ -31,7 +31,7 @@ public class Task implements IntegerDoubleTask {
 	}
 
 	@Override
-	public int executeTask1(List<String> input) {
+	public Integer executeTask1(List<String> input) {
 		map = initializeMap(input);
 		int sand = 0;
 		while (spawnSand(this::mayMove1, this::mayFinish1)) {
@@ -42,7 +42,7 @@ public class Task implements IntegerDoubleTask {
 	}
 
 	@Override
-	public int executeTask2(List<String> input) {
+	public Integer executeTask2(List<String> input) {
 		map = initializeMap(input);
 		map.setFloorHeight(map.getHeight() + 2, Materials.ROCK);
 
@@ -61,7 +61,7 @@ public class Task implements IntegerDoubleTask {
 	}
 
 	private boolean mayFinish1(Position sandPosition) {
-		return sandPosition.y() < map.getHeight();
+		return sandPosition.y() >= map.getHeight();
 	}
 
 	private boolean mayFinish2(Position sandPosition) {

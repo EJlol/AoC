@@ -1,6 +1,12 @@
 package nl.eleven.adventofcode.models.position;
 
+import nl.eleven.adventofcode.models.rect.Rectangle;
+
 public record Position(int x, int y) {
+
+	public static final Position ZERO = new Position(0,0);
+
+	public static final Position ONE = new Position(1,1);
 
 	public static final Position NORTH = new Position(0, -1);
 
@@ -38,5 +44,9 @@ public record Position(int x, int y) {
 	@Override
 	public String toString() {
 		return String.format("(%d, %d)", x(), y());
+	}
+
+	public Rectangle toRectangle() {
+		return new Rectangle(x(), y(), 1, 1);
 	}
 }

@@ -3,7 +3,7 @@ package nl.eleven.adventofcode.puzzles.year2022.day12_climbing;
 import nl.eleven.adventofcode.models.position.Position;
 import nl.eleven.adventofcode.models.table.CharacterTableMapper;
 import nl.eleven.adventofcode.models.table.Table;
-import nl.eleven.adventofcode.tasks.StringDoubleTask;
+import nl.eleven.adventofcode.tasks.TaskInterface;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
 @Component("year2022day12")
-public class Task implements StringDoubleTask {
+public class Task implements TaskInterface<String> {
 
 	Node letterENode = null;
 
@@ -57,7 +57,7 @@ public class Task implements StringDoubleTask {
 
 		generateMap(table, (toNode, fromNode) -> toNode.heightLevel <= fromNode.heightLevel + 1);
 		calculateWalkingRoute(letterSNode, n -> letterENode.equals(n));
-		return Integer.toString(letterENode.getCost());
+		return Integer.toString(letterENode.getCost() - 2);
 	}
 
 	@Override
@@ -66,7 +66,7 @@ public class Task implements StringDoubleTask {
 
 		generateMap(table, (toNode, fromNode) -> fromNode.heightLevel - 1 <= toNode.heightLevel);
 		Node r = calculateWalkingRoute(letterENode, n -> n.heightLevel == 0);
-		return "" + (r.getCost() - 2); // FIXME
+		return Integer.toString(r.getCost() - 2);
 	}
 
 	private Node calculateWalkingRoute(Node startNode, Predicate<Node> destination) {
@@ -77,7 +77,7 @@ public class Task implements StringDoubleTask {
 
 		Node currentNode = startNode;
 		while (!destination.test(currentNode) && !openList.isEmpty()) {
-			currentNode = openList.remove(0);
+			currentNode = openList.removeFirst();
 			visitedList.add(currentNode);
 
 			Node finalCurrentNode = currentNode;

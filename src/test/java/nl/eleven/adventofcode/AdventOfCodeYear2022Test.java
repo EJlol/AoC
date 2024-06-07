@@ -71,6 +71,62 @@ class AdventOfCodeYear2022Test {
 		executeTask(8, 2, "504000");
 	}
 
+	@Test
+	void year2022day9() {
+		executeTask(9, 1, "6023");
+		executeTask(9, 2, "2533");
+	}
+
+	@Test
+	void year2022day10() {
+		executeTask(10, 1, "15140");
+		executeTask(10, 2,
+				"""
+						###..###....##..##..####..##...##..###.#<br>
+						#..#.#..#....#.#..#....#.#..#.#..#.#..##<br>
+						###..#..#....#.#..#...#..#....#..#.#..#.<br>
+						#..#.###.....#.####..#...#.##.####.###..<br>
+						#..#.#....#..#.#..#.#....#..#.#..#.#....<br>
+						###..#.....##..#..#.####..###.#..#.#....<br>
+						""");
+	}
+
+	@Test
+	void year2022day11() {
+		executeTask(11, 1, "111210");
+		executeTask(11, 2, "15447387620");
+	}
+
+	@Test
+	void year2022day12() {
+		executeTask(12, 1, "462");
+		executeTask(12, 2, "451");
+	}
+
+	@Test
+	void year2022day13() {
+		executeTask(13, 1, "6428");
+		executeTask(13, 2, "22464");
+	}
+
+	@Test
+	void year2022day14() {
+		executeTask(14, 1, "793");
+		executeTask(14, 2, "24166");
+	}
+
+	@Test
+	void year2022day15() {
+		executeTask(15, 1, "4985193");
+		executeTask(15, 2, "11583882601918");
+	}
+
+	@Test
+	void year2022day18() {
+		executeTask(18, 1, "3470");
+		executeTask(18, 2, "1986");
+	}
+
 	private void executeTask(int day, int taskNumber, String answer) {
 		String result = taskService.executeTask(2022, day, taskNumber);
 		assertEquals(answer, result);

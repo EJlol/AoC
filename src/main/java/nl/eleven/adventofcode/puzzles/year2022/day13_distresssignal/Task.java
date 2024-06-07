@@ -4,9 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import nl.eleven.adventofcode.helpers.list.ListHelper;
+import nl.eleven.adventofcode.helpers.list.PartitionListBy;
 import nl.eleven.adventofcode.models.pair.SimplePair;
-import nl.eleven.adventofcode.tasks.IntegerDoubleTask;
+import nl.eleven.adventofcode.tasks.TaskInterface;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -14,12 +14,12 @@ import java.util.List;
 import java.util.stream.Stream;
 
 @Component("year2022day13")
-public class Task implements IntegerDoubleTask {
+public class Task implements TaskInterface<Integer> {
 
 	@Override
-	public int executeTask1(List<String> input) {
+	public Integer executeTask1(List<String> input) {
 		final ObjectMapper mapper = new ObjectMapper();
-		List<SimplePair<JsonNode>> pairs = ListHelper.partitionInTwoByEmptyLine(input).stream()
+		List<SimplePair<JsonNode>> pairs = PartitionListBy.inTwoByEmptyLine(input).stream()
 				.map(pair -> pair.map(jsonString -> {
 					try {
 						return mapper.readTree(jsonString);
@@ -38,9 +38,9 @@ public class Task implements IntegerDoubleTask {
 	}
 
 	@Override
-	public int executeTask2(List<String> input) {
+	public Integer executeTask2(List<String> input) {
 		final ObjectMapper mapper = new ObjectMapper();
-		List<SimplePair<JsonNode>> pairs = ListHelper.partitionInTwoByEmptyLine(input).stream()
+		List<SimplePair<JsonNode>> pairs = PartitionListBy.inTwoByEmptyLine(input).stream()
 				.map(pair -> pair.map(jsonString -> {
 					try {
 						return mapper.readTree(jsonString);
@@ -74,7 +74,7 @@ public class Task implements IntegerDoubleTask {
 		ArrayNode leftClone = left.deepCopy();
 		ArrayNode rightClone = right.deepCopy();
 		CompareResult result = CompareResult.EQUAL;
-		while (result.equals(CompareResult.EQUAL) && leftClone.size() > 0 && rightClone.size() > 0) {
+		while (result.equals(CompareResult.EQUAL) && !leftClone.isEmpty() && !rightClone.isEmpty()) {
 			JsonNode leftValue = leftClone.remove(0);
 			JsonNode rightValue = rightClone.remove(0);
 			result = compareJsonNode(leftValue, rightValue);

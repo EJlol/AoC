@@ -1,12 +1,11 @@
 package nl.eleven.adventofcode.helpers.list;
 
-import com.google.common.collect.Lists;
-import nl.eleven.adventofcode.models.pair.SimplePair;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Predicate;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class ListHelper {
 
@@ -14,41 +13,36 @@ public class ListHelper {
 
 	}
 
-	public static List<List<String>> partitionBy(List<String> input, Predicate<String> predicate, boolean includeAll) {
-		List<List<String>> result = new ArrayList<>();
+	public static <T> Map<T, Long> countEqualItems(List<T> input) {
+		return input.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+	}
 
-		List<String> currentList = new ArrayList<>();
-		result.add(currentList);
-
-		for (String line : input) {
-			if (predicate.test(line)) {
-				currentList = new ArrayList<>();
-				result.add(currentList);
-				if (includeAll) {
-					currentList.add(line);
-				}
-			} else {
-				currentList.add(line);
-			}
+	public static int max(List<Integer> list) {
+		if (list == null || list.isEmpty()) {
+			return 0;
 		}
-		return result;
+		return Collections.max(list);
 	}
 
-	public static List<List<String>> partitionByCount(List<String> input, int count) {
-		return Lists.partition(input, count);
+	public static <T> List<T> max(List<T> list, int amount) {
+		return list.stream()
+				.sorted(Collections.reverseOrder())
+				.limit(amount)
+				.toList();
 	}
 
-	public static List<List<String>> partitionByEmptyLines(List<String> input) {
-		return partitionBy(input, String::isEmpty, false);
+	public static int min(List<Integer> list) {
+		if (list == null || list.isEmpty()) {
+			return 0;
+		}
+		return Collections.min(list);
 	}
 
-	public static List<List<String>> partitionByStartsWith(List<String> input, String prefix) {
-		return partitionBy(input, line -> line.startsWith(prefix), true);
-	}
-
-	public static List<SimplePair<String>> partitionInTwoByEmptyLine(List<String> input) {
-		List<List<String>> partitions = partitionByEmptyLines(input);
-		return partitions.stream().map(innerList -> new SimplePair<>(innerList.get(0), innerList.get(1))).toList();
+	public static <T> List<T> min(List<T> list, int amount) {
+		return list.stream()
+				.sorted()
+				.limit(amount)
+				.toList();
 	}
 
 	public static <T> List<T> reverse(List<T> list) {
