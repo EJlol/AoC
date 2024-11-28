@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MultiPatternStringHelper<T> {
+
 	Map<T, String> patterns = new HashMap<>();
 
 	public void addPattern(T key, String pattern) {
@@ -17,7 +18,7 @@ public class MultiPatternStringHelper<T> {
 	 *
 	 * @param input The input string to parse.
 	 * @return A PatternResult object containing the key of the pattern that matched the longest part of the input string
-	 *         and a map of the parameters that were found. If no pattern matches the input string, null is returned.
+	 * and a map of the parameters that were found. If no pattern matches the input string, null is returned.
 	 */
 	public PatternResult<T> getParameters(String input) {
 		PatternStringHelper.ParameterStringSplitter splitter = new PatternStringHelper.ParameterStringSplitter();
@@ -45,5 +46,6 @@ public class MultiPatternStringHelper<T> {
 	}
 
 	public record PatternResult<T>(T key, Map<String, String> parameters) {
+
 	}
 }

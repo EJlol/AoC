@@ -47,7 +47,7 @@ public class Task implements TaskInterface<Integer> {
 				.orElse(0);
 	}
 
-	public long findTreeScore(List<Character> treeList, int cellTreeHeight) {
+	private long findTreeScore(List<Character> treeList, int cellTreeHeight) {
 		long result = treeList.stream()
 				.map(c -> Integer.parseInt("" + c))
 				.takeWhile(treeHeight -> treeHeight < cellTreeHeight)

@@ -37,13 +37,40 @@ public class Task implements TaskInterface<Integer> {
 				.mapToInt(FileDirectoryStructure::getSize).min().orElse(0);
 	}
 
-	public void getAllDirectories(List<DirectoryStructure> directories, DirectoryStructure directory) {
+	private void changeDirectory(String[] params) {
+		String directoryName = params[2];
+		if (directoryName.equals("/")) {
+			currentDirectory = root;
+		} else if (directoryName.equals("..")) {
+			currentDirectory = currentDirectory.getParent();
+		} else {
+			if (!currentDirectory.hasChild(directoryName)) {
+				currentDirectory.addChild(new DirectoryStructure(directoryName, currentDirectory));
+			}
+			currentDirectory = (DirectoryStructure) currentDirectory.getChild(directoryName);
+		}
+	}
+
+	private void getAllDirectories(List<DirectoryStructure> directories, DirectoryStructure directory) {
 		List<DirectoryStructure> childDirectories = directory.getChildDirectories();
 		directories.addAll(childDirectories);
 		childDirectories.forEach(d -> getAllDirectories(directories, d));
 	}
 
-	public List<DirectoryStructure> parseFileStructure(List<String> input) {
+	private void list(List<String> terminalBlockText) {
+		terminalBlockText.removeFirst();
+		terminalBlockText.forEach(line -> {
+			if (line.startsWith("dir ")) {
+				currentDirectory.addChild(new DirectoryStructure(line.substring(4), currentDirectory));
+			} else {
+				String[] fileAttributes = line.split(" ");
+				int size = Integer.parseInt(fileAttributes[0]);
+				currentDirectory.addChild(new FileStructure(fileAttributes[1], currentDirectory, size));
+			}
+		});
+	}
+
+	private List<DirectoryStructure> parseFileStructure(List<String> input) {
 		List<List<String>> commands = PartitionListBy.startsWith(input, "$");
 		commands.forEach(terminalBlockText -> {
 			if (terminalBlockText.isEmpty()) {
@@ -64,32 +91,5 @@ public class Task implements TaskInterface<Integer> {
 		getAllDirectories(allDirectories, root);
 
 		return allDirectories;
-	}
-
-	private void changeDirectory(String[] params) {
-		String directoryName = params[2];
-		if (directoryName.equals("/")) {
-			currentDirectory = root;
-		} else if (directoryName.equals("..")) {
-			currentDirectory = currentDirectory.getParent();
-		} else {
-			if (!currentDirectory.hasChild(directoryName)) {
-				currentDirectory.addChild(new DirectoryStructure(directoryName, currentDirectory));
-			}
-			currentDirectory = (DirectoryStructure) currentDirectory.getChild(directoryName);
-		}
-	}
-
-	private void list(List<String> terminalBlockText) {
-		terminalBlockText.removeFirst();
-		terminalBlockText.forEach(line -> {
-			if (line.startsWith("dir ")) {
-				currentDirectory.addChild(new DirectoryStructure(line.substring(4), currentDirectory));
-			} else {
-				String[] fileAttributes = line.split(" ");
-				int size = Integer.parseInt(fileAttributes[0]);
-				currentDirectory.addChild(new FileStructure(fileAttributes[1], currentDirectory, size));
-			}
-		});
 	}
 }

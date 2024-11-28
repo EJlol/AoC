@@ -8,7 +8,7 @@ public class SimplePair<T> extends Pair<T, T> {
 		super(left, right);
 	}
 
-	public <T2>SimplePair<T2> map(Function<? super T,? extends T2> mapper) {
+	public <T2> SimplePair<T2> map(Function<? super T, ? extends T2> mapper) {
 		return new SimplePair<>(mapper.apply(getLeft()), mapper.apply(getRight()));
 	}
 }

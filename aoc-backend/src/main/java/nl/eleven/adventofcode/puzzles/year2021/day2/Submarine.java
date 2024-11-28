@@ -8,28 +8,28 @@ class Submarine {
 
 	int forwardDistance;
 
-	public void decreaseAim(int delta) {
+	void decreaseAim(int delta) {
 		this.aim -= delta;
 	}
 
-	public void decreaseDepth(int delta) {
+	void decreaseDepth(int delta) {
 		this.depth -= delta;
 	}
 
-	public void forward(int delta) {
+	void forward(int delta) {
 		this.forwardDistance += delta;
 		this.depth += this.aim * delta;
 	}
 
-	public int getPosition() {
+	int getPosition() {
 		return this.depth * this.forwardDistance;
 	}
 
-	public void increaseAim(int delta) {
+	void increaseAim(int delta) {
 		this.aim += delta;
 	}
 
-	public void increaseDepth(int delta) {
+	void increaseDepth(int delta) {
 		this.depth += delta;
 	}
 }

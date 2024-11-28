@@ -7,17 +7,13 @@ class Sensor extends Entity {
 
 	private int closestBeaconDistance = Integer.MAX_VALUE;
 
-	public Sensor(Position position) {
+	Sensor(Position position) {
 		super(position);
 	}
 
 	@Override
 	public String toString() {
 		return "S";
-	}
-
-	void updateClosestBeaconDistance(int closestBeaconDistance) {
-		this.closestBeaconDistance = Math.min(this.closestBeaconDistance, closestBeaconDistance);
 	}
 
 	Range<Integer> getRangeWithoutBeacons(int row) {
@@ -28,5 +24,9 @@ class Sensor extends Entity {
 
 		int columnStrength = closestBeaconDistance - distance;
 		return Range.closed(position.x() - columnStrength, position.x() + columnStrength);
+	}
+
+	void updateClosestBeaconDistance(int closestBeaconDistance) {
+		this.closestBeaconDistance = Math.min(this.closestBeaconDistance, closestBeaconDistance);
 	}
 }

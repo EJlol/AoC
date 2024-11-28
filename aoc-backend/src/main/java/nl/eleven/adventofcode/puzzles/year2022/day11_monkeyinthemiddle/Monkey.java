@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
 
-public class Monkey {
+class Monkey {
 
 	private final int falseMonkey;
 
@@ -20,8 +20,8 @@ public class Monkey {
 
 	private int totalInspectedItems;
 
-	public Monkey(Queue<Long> items, Operation operation, int operationNumber, int testDivision, int trueMonkey,
-				  int falseMonkey) {
+	Monkey(Queue<Long> items, Operation operation, int operationNumber, int testDivision, int trueMonkey,
+		   int falseMonkey) {
 		this.items = items;
 		this.operation = operation;
 		this.operationNumber = operationNumber;
@@ -31,7 +31,7 @@ public class Monkey {
 		this.totalInspectedItems = 0;
 	}
 
-	public void doTurn(List<Monkey> monkeys, boolean withWorry) {
+	void doTurn(List<Monkey> monkeys, boolean withWorry) {
 		List<Long> tempItems = new ArrayList<>(items);
 		for (int i = 0; i < tempItems.size(); i++) {
 			long item = items.remove();
@@ -41,7 +41,7 @@ public class Monkey {
 		}
 	}
 
-	public int getTotalInspectedItems() {
+	int getTotalInspectedItems() {
 		return totalInspectedItems;
 	}
 

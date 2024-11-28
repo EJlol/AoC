@@ -17,20 +17,20 @@ public class PatternStringHelper {
 
 		String pattern;
 
-		Map<String, String> result;
-
 		int patternLength;
+
+		Map<String, String> result;
 
 		public ParameterStringSplitter() {
 			result = new HashMap<>();
 		}
 
-		public Map<String, String> getResult() {
-			return result;
-		}
-
 		public int getPatternLength() {
 			return patternLength;
+		}
+
+		public Map<String, String> getResult() {
+			return result;
 		}
 
 		public void parse(String input, String pattern) {

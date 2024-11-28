@@ -4,11 +4,6 @@ import java.util.EnumMap;
 import java.util.Map;
 
 public class RpsMatch {
-	private final EnumMap<RpsShape, RpsShape> wins = new EnumMap<>(Map.of(
-			RpsShape.ROCK, RpsShape.SCISSORS,
-			RpsShape.PAPER, RpsShape.ROCK,
-			RpsShape.SCISSORS, RpsShape.PAPER
-	));
 
 	private final EnumMap<RpsShape, RpsShape> loses = new EnumMap<>(Map.of(
 			RpsShape.ROCK, RpsShape.PAPER,
@@ -16,8 +11,15 @@ public class RpsMatch {
 			RpsShape.SCISSORS, RpsShape.ROCK
 	));
 
-	private final RpsShape you;
 	private final RpsShape opponent;
+
+	private final EnumMap<RpsShape, RpsShape> wins = new EnumMap<>(Map.of(
+			RpsShape.ROCK, RpsShape.SCISSORS,
+			RpsShape.PAPER, RpsShape.ROCK,
+			RpsShape.SCISSORS, RpsShape.PAPER
+	));
+
+	private final RpsShape you;
 
 	public RpsMatch(RpsShape you, RpsShape opponent) {
 		this.you = you;
@@ -35,24 +37,8 @@ public class RpsMatch {
 		}
 	}
 
-	public RpsShape getYou() {
-		return you;
-	}
-
 	public RpsShape getOpponent() {
 		return opponent;
-	}
-
-	public boolean isPlayerWinning() {
-		return wins.get(you) == opponent;
-	}
-
-	public boolean isOpponentWinning() {
-		return wins.get(opponent) == you;
-	}
-
-	public boolean isDraw() {
-		return you == opponent;
 	}
 
 	public WinState getResult() {
@@ -62,5 +48,21 @@ public class RpsMatch {
 			return WinState.LOSE;
 		}
 		return WinState.DRAW;
+	}
+
+	public RpsShape getYou() {
+		return you;
+	}
+
+	public boolean isDraw() {
+		return you == opponent;
+	}
+
+	public boolean isOpponentWinning() {
+		return wins.get(opponent) == you;
+	}
+
+	public boolean isPlayerWinning() {
+		return wins.get(you) == opponent;
 	}
 }

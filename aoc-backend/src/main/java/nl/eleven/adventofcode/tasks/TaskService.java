@@ -10,9 +10,9 @@ import java.util.List;
 @Service
 public class TaskService {
 
-	ApplicationContext context;
+	private final ApplicationContext context;
 
-	PuzzleService puzzleService;
+	private final PuzzleService puzzleService;
 
 	public TaskService(ApplicationContext context, PuzzleService puzzleService) {
 		this.context = context;
@@ -32,20 +32,6 @@ public class TaskService {
 		return task.executeTaskAndReturnString(taskNumber, puzzleInput);
 	}
 
-	TaskInterface<?> getTask(int year, int day, int taskNumber) {
-		String beanName = "year" + year + "day" + day + "task" + taskNumber;
-
-		if (!context.containsBean(beanName)) {
-			beanName = "year" + year + "day" + day;
-		}
-
-		if (!context.containsBean(beanName)) {
-			return null;
-		}
-
-		return (TaskInterface<?>) this.context.getBean(beanName);
-	}
-
 	public List<TaskDto> getAllTasks() {
 		String[] result = context.getBeanNamesForType(TaskInterface.class);
 		return Arrays
@@ -58,6 +44,20 @@ public class TaskService {
 					return a.year() - b.year();
 				})
 				.toList();
+	}
+
+	private TaskInterface<?> getTask(int year, int day, int taskNumber) {
+		String beanName = "year" + year + "day" + day + "task" + taskNumber;
+
+		if (!context.containsBean(beanName)) {
+			beanName = "year" + year + "day" + day;
+		}
+
+		if (!context.containsBean(beanName)) {
+			return null;
+		}
+
+		return (TaskInterface<?>) this.context.getBean(beanName);
 	}
 
 	private TaskDto mapToTaskDto(String beanName) {

@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 @Component("year2022day16")
 public class Task implements TaskInterface<Integer> {
 
-	List<Tunnel> tunnels;
+	private List<Tunnel> tunnels;
 
 	@Override
 	public Integer executeTask1(List<String> input) {

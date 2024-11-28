@@ -5,7 +5,7 @@ import nl.eleven.adventofcode.models.rps.WinState;
 
 import java.util.Map;
 
-public class Instruction2 {
+class Instruction2 {
 
 	RpsShape left;
 
@@ -23,17 +23,17 @@ public class Instruction2 {
 			"Z", WinState.WIN
 	);
 
-	public Instruction2(String instruction) {
+	Instruction2(String instruction) {
 		String[] splitInstruction = instruction.split(" ");
 		left = shapeLetters.get(splitInstruction[0]);
 		right = winStateLetters.get(splitInstruction[1]);
 	}
 
-	public RpsShape getLeft() {
+	RpsShape getLeft() {
 		return left;
 	}
 
-	public WinState getRight() {
+	WinState getRight() {
 		return right;
 	}
 }

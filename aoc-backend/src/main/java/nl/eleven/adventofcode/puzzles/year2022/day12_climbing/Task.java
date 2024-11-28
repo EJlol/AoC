@@ -14,11 +14,9 @@ import java.util.function.Predicate;
 @Component("year2022day12")
 public class Task implements TaskInterface<String> {
 
-	Node letterENode = null;
+	private Node letterENode = null;
 
-	Node letterSNode = null;
-
-	List<Node> lowestElevationLevel = new ArrayList<>();
+	private Node letterSNode = null;
 
 	private static void generateNeighbourConnections(Node[][] map, Node node, BiPredicate<Node, Node> fn) {
 		Position p = node.getPosition();
@@ -107,9 +105,6 @@ public class Task implements TaskInterface<String> {
 			letterSNode = node;
 		} else if (c == 'E') {
 			letterENode = node;
-		}
-		if (heightLevel == 0) {
-			lowestElevationLevel.add(node);
 		}
 		return node;
 	}

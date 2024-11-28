@@ -10,6 +10,13 @@ import java.util.List;
 @Component("year2023day1")
 public class Task implements TaskInterface<Integer> {
 
+	private static String getNumberFromInput(String input) {
+		List<String> digitWords = Constants.DIGITS.keySet().stream().toList();
+		String firstDigit = StringHelper.findLeftMostString(input, s -> Character.isDigit(s.charAt(0)) || StringHelper.startsWithAny(s, digitWords) != null);
+		String secondDigit = StringHelper.findRightMostString(input, s -> Character.isDigit(s.charAt(0)) || StringHelper.startsWithAny(s, digitWords) != null);
+		return firstDigit + secondDigit;
+	}
+
 	@Override
 	public Integer executeTask1(List<String> input) {
 		return input.stream()
@@ -26,12 +33,5 @@ public class Task implements TaskInterface<Integer> {
 				.map(s -> s.substring(0, 2))
 				.mapToInt(Integer::parseInt)
 				.sum();
-	}
-
-	private static String getNumberFromInput(String input) {
-		List<String> digitWords = Constants.DIGITS.keySet().stream().toList();
-		String firstDigit = StringHelper.findLeftMostString(input, s -> Character.isDigit(s.charAt(0)) || StringHelper.startsWithAny(s, digitWords) != null);
-		String secondDigit = StringHelper.findRightMostString(input, s -> Character.isDigit(s.charAt(0)) || StringHelper.startsWithAny(s, digitWords) != null);
-		return firstDigit + secondDigit;
 	}
 }

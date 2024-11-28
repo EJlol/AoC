@@ -21,27 +21,27 @@ public class Node {
 		neighbours = new ArrayList<>();
 	}
 
-	public void addNeighbour(Node node) {
+	void addNeighbour(Node node) {
 		neighbours.add(node);
 	}
 
-	public int getCost() {
+	int getCost() {
 		return cost;
 	}
 
-	public void setCost(int cost) {
+	void setCost(int cost) {
 		this.cost = cost;
 	}
 
-	public int getHeuristic(Position position) {
+	int getHeuristic(Position position) {
 		return Math.abs(this.position.x() - position.x()) + Math.abs(this.position.y() - position.y());
 	}
 
-	public List<Node> getNeighbours() {
+	List<Node> getNeighbours() {
 		return neighbours;
 	}
 
-	public Position getPosition() {
+	Position getPosition() {
 		return position;
 	}
 }

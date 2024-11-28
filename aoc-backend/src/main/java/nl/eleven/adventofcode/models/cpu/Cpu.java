@@ -69,10 +69,6 @@ public abstract class Cpu<S> implements RegisterInterface {
 		return cycleCount;
 	}
 
-	public abstract Instruction<S> getInstruction(S instruction);
-
-	public abstract List<S> getParametersForLine(S line);
-
 	public List<S> getProgram() {
 		return program;
 	}
@@ -85,7 +81,11 @@ public abstract class Cpu<S> implements RegisterInterface {
 		return registers.getOrDefault(registerIndex, 0);
 	}
 
-	public abstract Map<Integer, Integer> initializeRegisters();
-
 	public abstract boolean shouldStop();
+
+	protected abstract Instruction<S> getInstruction(S instruction);
+
+	protected abstract List<S> getParametersForLine(S line);
+
+	protected abstract Map<Integer, Integer> initializeRegisters();
 }

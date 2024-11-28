@@ -12,7 +12,7 @@ import java.util.function.Predicate;
 @Component("year2022day14")
 public class Task implements TaskInterface<Integer> {
 
-	MapTable<Materials> map = null;
+	private MapTable<Materials> map = null;
 
 	private static MapTable<Materials> initializeMap(List<String> input) {
 		MapTable<Materials> map = new MapTable<>();

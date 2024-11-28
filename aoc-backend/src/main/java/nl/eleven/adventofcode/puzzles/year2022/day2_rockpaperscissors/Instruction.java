@@ -4,7 +4,7 @@ import nl.eleven.adventofcode.models.rps.RpsShape;
 
 import java.util.Map;
 
-public class Instruction {
+class Instruction {
 
 	RpsShape left;
 
@@ -19,17 +19,17 @@ public class Instruction {
 			"Z", RpsShape.SCISSORS
 	);
 
-	public Instruction(String instruction) {
+	Instruction(String instruction) {
 		String[] splitInstruction = instruction.split(" ");
 		left = shapeLetters.get(splitInstruction[0]);
 		right = shapeLetters.get(splitInstruction[1]);
 	}
 
-	public RpsShape getLeft() {
+	RpsShape getLeft() {
 		return left;
 	}
 
-	public RpsShape getRight() {
+	RpsShape getRight() {
 		return right;
 	}
 }

@@ -11,9 +11,9 @@ public class Task implements TaskInterface<Integer> {
 	@Override
 	public Integer executeTask1(List<String> input) {
 		return input.stream().map(s -> {
-			String[] splittedGame = s.split(": ");
-			return new Game(Integer.parseInt(splittedGame[0].split(" ")[1]), splittedGame[1]);
-		})
+					String[] splittedGame = s.split(": ");
+					return new Game(Integer.parseInt(splittedGame[0].split(" ")[1]), splittedGame[1]);
+				})
 				.filter(Game::isValidForTask1)
 				.mapToInt(g -> g.id).sum();
 	}

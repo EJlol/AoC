@@ -4,9 +4,9 @@ import nl.eleven.adventofcode.models.position.Position;
 
 class Entity {
 
-	protected final Position position;
+	final Position position;
 
-	public Entity(Position p) {
+	Entity(Position p) {
 		position = p;
 	}
 }

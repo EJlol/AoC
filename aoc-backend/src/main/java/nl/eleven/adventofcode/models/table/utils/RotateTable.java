@@ -44,14 +44,6 @@ public class RotateTable {
 	 */
 	public static <T> List<List<T>> rotateCounterClockwise(List<List<T>> inputTable) {
 		Collections.reverse(inputTable);
-		List<List<T>> outputTable = new ArrayList<>();
-		for (int column = 0; column < inputTable.getFirst().size(); column++) {
-			List<T> outputInnerList = new ArrayList<>();
-			for (List<T> row : inputTable) {
-				outputInnerList.add(row.get(column));
-			}
-			outputTable.add(outputInnerList);
-		}
-		return outputTable;
+		return rotate(inputTable);
 	}
 }

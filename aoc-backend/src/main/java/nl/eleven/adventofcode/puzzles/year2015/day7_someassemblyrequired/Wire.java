@@ -2,8 +2,10 @@ package nl.eleven.adventofcode.puzzles.year2015.day7_someassemblyrequired;
 
 import java.util.Map;
 
-public class Wire {
+class Wire {
+
 	private final String input1;
+
 	private final String input2;
 
 	private final Operations operations;
@@ -12,7 +14,7 @@ public class Wire {
 
 	Map<String, Wire> wireMap;
 
-	public Wire(Map<String, Wire> wireMap, String identifier, Operations operations, String input1, String input2) {
+	Wire(Map<String, Wire> wireMap, String identifier, Operations operations, String input1, String input2) {
 		this.wireMap = wireMap;
 		this.operations = operations;
 		this.input1 = input1;

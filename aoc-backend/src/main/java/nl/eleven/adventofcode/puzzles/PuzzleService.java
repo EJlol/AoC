@@ -53,7 +53,18 @@ public class PuzzleService {
 		return new ArrayList<>();
 	}
 
-	public String retrievePuzzleContentFromUrl(int year, int day) {
+	private boolean checkPathExists() {
+		if (!Files.exists(path)) {
+			return path.toFile().mkdirs();
+		}
+		return true;
+	}
+
+	private String getUrl(int year, int day) {
+		return "https://adventofcode.com/" + year + "/day/" + day + "/input";
+	}
+
+	private String retrievePuzzleContentFromUrl(int year, int day) {
 		String url = getUrl(year, day);
 
 		RestTemplate restTemplate = new RestTemplate();
@@ -81,16 +92,5 @@ public class PuzzleService {
 		} catch (RestClientException e) {
 			throw new CouldNotRetrievePuzzleInputException(e.getMessage());
 		}
-	}
-
-	private boolean checkPathExists() {
-		if (!Files.exists(path)) {
-			return path.toFile().mkdirs();
-		}
-		return true;
-	}
-
-	private String getUrl(int year, int day) {
-		return "https://adventofcode.com/" + year + "/day/" + day + "/input";
 	}
 }

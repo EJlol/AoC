@@ -42,6 +42,7 @@ public class Task implements TaskInterface<Integer> {
 	);
 
 	Position snakeHead;
+
 	List<Position> snakeTail;
 
 	private static List<Position> initializeSnakeTail(int tailLength) {

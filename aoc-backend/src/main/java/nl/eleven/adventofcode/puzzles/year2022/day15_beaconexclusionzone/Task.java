@@ -21,7 +21,7 @@ public class Task implements TaskInterface<Long> {
 
 	private static final int ROW_NUMBER = 2000000;
 
-	MapTable<Object> map = null;
+	private MapTable<Object> map = null;
 
 	@Override
 	public Long executeTask1(List<String> input) {
@@ -32,7 +32,7 @@ public class Task implements TaskInterface<Long> {
 	@Override
 	public Long executeTask2(List<String> input) {
 		initializeMap(input);
-		for(int y = 0; y < 4000000; y++) {
+		for (int y = 0; y < 4000000; y++) {
 			Set<Range<Integer>> rangeSet = findRangesForRow(y)
 					.subRangeSet(Range.closed(0, 4000000))
 					.complement()

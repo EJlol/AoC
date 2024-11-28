@@ -12,11 +12,11 @@ public class Task implements TaskInterface<String> {
 	public String executeTask1(List<String> input) {
 		return "" + input.stream()
 				.map(s -> s
-							.replace("2", "4")
-							.replace("1", "3")
-							.replace("0", "2")
-							.replace("-", "1")
-							.replace("=", "0")
+						.replace("2", "4")
+						.replace("1", "3")
+						.replace("0", "2")
+						.replace("-", "1")
+						.replace("=", "0")
 				)
 				.mapToInt(s -> Integer.parseInt(s, 5))
 				.sum();

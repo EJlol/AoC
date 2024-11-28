@@ -4,7 +4,7 @@ import nl.eleven.adventofcode.models.position.Position;
 
 class Beacon extends Entity {
 
-	public Beacon(Position position) {
+	Beacon(Position position) {
 		super(position);
 	}
 

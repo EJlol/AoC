@@ -19,8 +19,9 @@ public class BingoCard {
 		int totalScore = 0;
 		for (int y = 0; y < this.input.getHeight(); y++) {
 			for (int x = 0; x < this.input.getWidth(); x++) {
-				if (!marked[y][x]) {
-					totalScore += input.get(x, y);
+				Integer value = input.get(x, y);
+				if (value != null && !marked[y][x]) {
+					totalScore += value;
 				}
 			}
 		}
@@ -61,6 +62,10 @@ public class BingoCard {
 
 	public void mark(int number) {
 		Position position = this.input.getPositionByValue(number);
+		if (position == null) {
+			return;
+		}
+
 		marked[position.y()][position.x()] = true;
 	}
 }

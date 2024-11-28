@@ -1,4 +1,4 @@
-package nl.eleven.adventofcode.puzzles.year2023.day3;
+package nl.eleven.adventofcode.puzzles.year2023.day3_gearratios;
 
 import nl.eleven.adventofcode.models.position.Position;
 import nl.eleven.adventofcode.models.rect.Rectangle;
@@ -31,13 +31,13 @@ public class Task implements TaskInterface<Integer> {
 		return table.getRectangles(Character::isDigit).stream()
 				.filter(rectangle -> {
 					List<Character> northSouthChars = IntStream.rangeClosed(
-							rectangle.getX() - 1,
-							rectangle.getX() + rectangle.getWidth() + 1)
-					.mapToObj(x -> List.of(
-							table.getOrDefault(x, rectangle.getY() - 1, '.'),
-							table.getOrDefault(x, rectangle.getY() + 1, '.')))
-					.flatMap(List::stream)
-					.toList();
+									rectangle.getX() - 1,
+									rectangle.getX() + rectangle.getWidth() + 1)
+							.mapToObj(x -> List.of(
+									table.getOrDefault(x, rectangle.getY() - 1, '.'),
+									table.getOrDefault(x, rectangle.getY() + 1, '.')))
+							.flatMap(List::stream)
+							.toList();
 
 					return northSouthChars.stream().anyMatch(ch -> !Character.isDigit(ch) && ch != '.');
 				})

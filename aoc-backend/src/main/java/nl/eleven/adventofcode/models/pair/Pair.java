@@ -25,9 +25,8 @@ public class Pair<T1, T2> implements PairInterface<T1, T2> {
 		return right;
 	}
 
-	@Override
-	public <R> PairInterface<T1, R> mapRight(BiFunction<? super T1, ? super T2, ? extends R> mapper) {
-		return new Pair<>(getLeft(), mapper.apply(getLeft(), getRight()));
+	public void setRight(T2 right) {
+		this.right = right;
 	}
 
 	@Override
@@ -35,7 +34,8 @@ public class Pair<T1, T2> implements PairInterface<T1, T2> {
 		return new Pair<>(mapper.apply(getLeft(), getRight()), getRight());
 	}
 
-	public void setRight(T2 right) {
-		this.right = right;
+	@Override
+	public <R> PairInterface<T1, R> mapRight(BiFunction<? super T1, ? super T2, ? extends R> mapper) {
+		return new Pair<>(getLeft(), mapper.apply(getLeft(), getRight()));
 	}
 }

@@ -11,7 +11,7 @@ import java.util.function.BiPredicate;
 @Component("year2022day18")
 public class Task implements TaskInterface<Integer> {
 
-	MapTable3D<Materials> map = null;
+	private MapTable3D<Materials> map = null;
 
 	/**
 	 * Executes the first task.
@@ -51,7 +51,7 @@ public class Task implements TaskInterface<Integer> {
 		return getExposedSides((p, p2) -> Materials.FILLED.equals(map.get(p)) && Materials.EMPTY.equals(map.get(p2)));
 	}
 
-	public int getExposedSides(BiPredicate<Position3D, Position3D> predicate) {
+	private int getExposedSides(BiPredicate<Position3D, Position3D> predicate) {
 		List<Position3D> directions = List.of(Position3D.NORTH, Position3D.SOUTH, Position3D.WEST, Position3D.EAST, Position3D.FORWARDS, Position3D.BACKWARDS);
 
 		return map.streamEntries().mapToInt(entry -> {

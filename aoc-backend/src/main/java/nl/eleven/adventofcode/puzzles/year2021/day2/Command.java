@@ -1,11 +1,11 @@
 package nl.eleven.adventofcode.puzzles.year2021.day2;
 
-public enum Command {
+enum Command {
 	FORWARD,
 	DOWN,
 	UP;
 
-	public static Command of(String command) {
+	static Command of(String command) {
 		return switch (command.toLowerCase()) {
 			case "forward" -> FORWARD;
 			case "down" -> DOWN;

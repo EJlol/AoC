@@ -8,9 +8,9 @@ import java.util.Map;
 
 class Game {
 
-	int id;
-
 	Map<String, Integer> colorMaxMap;
+
+	int id;
 
 	public Game(int id, String gameInput) {
 		this.id = id;
@@ -23,11 +23,11 @@ class Game {
 		}
 	}
 
-	public boolean isValidForTask1() {
-		return colorMaxMap.get("red") <= 12 && colorMaxMap.get("green") <= 13 && colorMaxMap.get("blue") <= 14;
+	int getPower() {
+		return colorMaxMap.get("red") * colorMaxMap.get("green") * colorMaxMap.get("blue");
 	}
 
-	public int getPower() {
-		return colorMaxMap.get("red") * colorMaxMap.get("green") * colorMaxMap.get("blue");
+	boolean isValidForTask1() {
+		return colorMaxMap.get("red") <= 12 && colorMaxMap.get("green") <= 13 && colorMaxMap.get("blue") <= 14;
 	}
 }

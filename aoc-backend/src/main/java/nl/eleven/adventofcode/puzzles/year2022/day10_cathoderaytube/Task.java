@@ -1,7 +1,6 @@
 package nl.eleven.adventofcode.puzzles.year2022.day10_cathoderaytube;
 
 import nl.eleven.adventofcode.models.cpu.Cpu;
-import nl.eleven.adventofcode.puzzles.year2022.day10_cathoderaytube.instructions.CpuImpl;
 import nl.eleven.adventofcode.tasks.TaskInterface;
 import org.springframework.stereotype.Component;
 

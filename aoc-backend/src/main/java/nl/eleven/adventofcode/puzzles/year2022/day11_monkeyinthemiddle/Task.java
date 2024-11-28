@@ -13,10 +13,6 @@ public class Task implements TaskInterface<Long> {
 
 	ArrayList<Monkey> monkeys = new ArrayList<>();
 
-	public void doRound(boolean withWorry) {
-		monkeys.forEach(monkey -> monkey.doTurn(monkeys, withWorry));
-	}
-
 	@Override
 	public Long executeTask1(List<String> input) {
 		return playGame(20, true);
@@ -27,7 +23,11 @@ public class Task implements TaskInterface<Long> {
 		return playGame(10_000, false);
 	}
 
-	public long playGame(int rounds, boolean withWorry) {
+	private void doRound(boolean withWorry) {
+		monkeys.forEach(monkey -> monkey.doTurn(monkeys, withWorry));
+	}
+
+	private long playGame(int rounds, boolean withWorry) {
 		prepareMonkeys();
 		for (int i = 0; i < rounds; i++) {
 			doRound(withWorry);

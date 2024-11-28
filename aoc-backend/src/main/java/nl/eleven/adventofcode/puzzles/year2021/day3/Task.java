@@ -22,7 +22,7 @@ public class Task implements TaskInterface<Integer> {
 	 * This process is repeated until the height of the table is 1.
 	 * The method finally returns the remaining row in the table as a string.
 	 *
-	 * @param table A Table<Character> representing the binary table.
+	 * @param table     A Table<Character> representing the binary table.
 	 * @param predicate A BiPredicate<Long, Long> used to determine which character to filter by. The predicate takes two arguments: the count of '0' and the count of '1'.
 	 * @return A String representing the remaining row in the table.
 	 */
@@ -50,14 +50,14 @@ public class Task implements TaskInterface<Integer> {
 				.rotate()
 				.contents()
 				.stream()
-					.map(ListHelper::countEqualItems)
-					.map(characterFrequencies -> {
-						long zero = characterFrequencies.get('0');
-						long one = characterFrequencies.get('1');
-						return zero > one ? '0' : '1';
-					})
-					.map(Object::toString)
-					.collect(Collectors.joining());
+				.map(ListHelper::countEqualItems)
+				.map(characterFrequencies -> {
+					long zero = characterFrequencies.get('0');
+					long one = characterFrequencies.get('1');
+					return zero > one ? '0' : '1';
+				})
+				.map(Object::toString)
+				.collect(Collectors.joining());
 
 		String epsilon = gamma.replace('0', '-').replace('1', '0').replace('-', '1');
 		return Integer.parseInt(gamma, 2) * Integer.parseInt(epsilon, 2);

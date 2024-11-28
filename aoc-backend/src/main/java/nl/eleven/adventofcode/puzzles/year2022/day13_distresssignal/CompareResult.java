@@ -1,6 +1,6 @@
 package nl.eleven.adventofcode.puzzles.year2022.day13_distresssignal;
 
-public enum CompareResult {
+enum CompareResult {
 	TRUE(-1),
 	FALSE(1),
 	EQUAL(0);
@@ -11,7 +11,7 @@ public enum CompareResult {
 		this.value = compareValue;
 	}
 
-	public static CompareResult compare(int left, int right) {
+	static CompareResult compare(int left, int right) {
 		if (left < right) {
 			return CompareResult.TRUE;
 		} else if (right < left) {
@@ -20,7 +20,7 @@ public enum CompareResult {
 		return CompareResult.EQUAL;
 	}
 
-	public int getValue() {
+	int getValue() {
 		return value;
 	}
 }

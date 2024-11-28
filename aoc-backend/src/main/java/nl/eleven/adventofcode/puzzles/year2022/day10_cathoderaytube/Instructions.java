@@ -1,11 +1,11 @@
-package nl.eleven.adventofcode.puzzles.year2022.day10_cathoderaytube.instructions;
+package nl.eleven.adventofcode.puzzles.year2022.day10_cathoderaytube;
 
 import nl.eleven.adventofcode.models.cpu.Instruction;
 import nl.eleven.adventofcode.models.cpu.RegisterInterface;
 
 import java.util.List;
 
-public enum Instructions implements Instruction<String> {
+enum Instructions implements Instruction<String> {
 
 	NOOP(1, "noop"),
 	ADDX(2, "addx");

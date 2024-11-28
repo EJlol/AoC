@@ -16,6 +16,14 @@ public class Task implements TaskInterface<Long> {
 
 	private final int[][] lights = new int[1000][1000];
 
+	private static MultiPatternStringHelper<Commands> getMultiPatternStringHelper() {
+		MultiPatternStringHelper<Commands> multiPatternStringHelper = new MultiPatternStringHelper<>();
+		multiPatternStringHelper.addPattern(Commands.TURN_ON, "turn on {x},{y} through {x2},{y2}");
+		multiPatternStringHelper.addPattern(Commands.TURN_OFF, "turn off {x},{y} through {x2},{y2}");
+		multiPatternStringHelper.addPattern(Commands.TOGGLE, "toggle {x},{y} through {x2},{y2}");
+		return multiPatternStringHelper;
+	}
+
 	private static Rectangle getRectangle(Map<String, String> parameters) {
 		return new Rectangle(
 				Integer.parseInt(parameters.get("x")),
@@ -49,14 +57,6 @@ public class Task implements TaskInterface<Long> {
 		return LongStream.range(0, 1000)
 				.flatMap(i ->
 						LongStream.range(0, 1000).map(j -> lights[(int) i][(int) j])).sum();
-	}
-
-	private static MultiPatternStringHelper<Commands> getMultiPatternStringHelper() {
-		MultiPatternStringHelper<Commands> multiPatternStringHelper = new MultiPatternStringHelper<>();
-		multiPatternStringHelper.addPattern(Commands.TURN_ON, "turn on {x},{y} through {x2},{y2}");
-		multiPatternStringHelper.addPattern(Commands.TURN_OFF, "turn off {x},{y} through {x2},{y2}");
-		multiPatternStringHelper.addPattern(Commands.TOGGLE, "toggle {x},{y} through {x2},{y2}");
-		return multiPatternStringHelper;
 	}
 
 	private void changeLight(Function<Integer, Integer> action, Rectangle rectangle) {
