@@ -3,6 +3,7 @@ package nl.eleven.adventofcode.models.table;
 import com.google.common.collect.Lists;
 import nl.eleven.adventofcode.helpers.list.ListHelper;
 import nl.eleven.adventofcode.models.position.Position;
+import nl.eleven.adventofcode.models.rect.ColumnSpan;
 import nl.eleven.adventofcode.models.rect.Rectangle;
 import nl.eleven.adventofcode.models.table.utils.RotateTable;
 
@@ -168,6 +169,35 @@ public record Table<T>(List<List<T>> contents) {
 	}
 
 	/**
+	 * Retrieves a list of rectangles from the table based on a given predicate.
+	 *
+	 * @param predicate A Predicate that takes a cell value.
+	 *                  The predicate should return true for cells that should be included in the rectangle.
+	 * @return A list of rectangles. Each rectangle represents a contiguous group of cells for which the predicate returned true.
+	 * The rectangles are determined by scanning the table row by row from top to bottom, and within each row from left to right.
+	 * If no group of cells satisfies the predicate, an empty list is returned.
+	 */
+	public List<ColumnSpan> getColumnSpansByPredicate(Predicate<T> predicate) {
+		List<ColumnSpan> result = new ArrayList<>();
+		for (int y = 0; y < contents.size(); y++) {
+			ColumnSpan currentRowSpan = null;
+			for (int x = 0; x < contents.get(y).size(); x++) {
+				if (predicate.test(contents.get(y).get(x))) {
+					if (currentRowSpan == null) {
+						currentRowSpan = new ColumnSpan(y, x, 1);
+						result.add(currentRowSpan);
+					} else {
+						currentRowSpan.growRight();
+					}
+				} else {
+					currentRowSpan = null;
+				}
+			}
+		}
+		return result;
+	}
+
+	/**
 	 * Retrieves the height of the table.
 	 *
 	 * @return The number of rows in the table.
@@ -210,35 +240,6 @@ public record Table<T>(List<List<T>> contents) {
 	}
 
 	/**
-	 * Retrieves a list of rectangles from the table based on a given predicate.
-	 *
-	 * @param predicate A Predicate that takes a cell value.
-	 *                  The predicate should return true for cells that should be included in the rectangle.
-	 * @return A list of rectangles. Each rectangle represents a contiguous group of cells for which the predicate returned true.
-	 * The rectangles are determined by scanning the table row by row from top to bottom, and within each row from left to right.
-	 * If no group of cells satisfies the predicate, an empty list is returned.
-	 */
-	public List<Rectangle> getRectangles(Predicate<T> predicate) {
-		List<Rectangle> result = new ArrayList<>();
-		for (int y = 0; y < contents.size(); y++) {
-			Rectangle currentRectangle = null;
-			for (int x = 0; x < contents.get(y).size(); x++) {
-				if (predicate.test(contents.get(y).get(x))) {
-					if (currentRectangle == null) {
-						currentRectangle = new Rectangle(x, y, 1, 1);
-						result.add(currentRectangle);
-					} else {
-						currentRectangle.growRight();
-					}
-				} else {
-					currentRectangle = null;
-				}
-			}
-		}
-		return result;
-	}
-
-	/**
 	 * Retrieves a row from the table.
 	 *
 	 * @param index The index of the row to retrieve. The topmost row has index 0.
@@ -247,6 +248,23 @@ public record Table<T>(List<List<T>> contents) {
 	 */
 	public List<T> getRow(int index) {
 		return contents.get(index);
+	}
+
+	public List<T> getValuesFromColumnSpan(ColumnSpan columnSpan) {
+		return getRow(columnSpan.getRow()).subList(columnSpan.getX(), columnSpan.getRightX());
+	}
+
+	public List<T> getValuesFromRectangle(Rectangle rectangle) {
+		List<T> result = new ArrayList<>();
+		for (int y = rectangle.getY(); y < rectangle.getY() + rectangle.getHeight(); y++) {
+			if (y < 0 || y >= contents.size()) {
+				continue;
+			}
+			int left = Math.max(0, rectangle.getX());
+			int right = Math.min(rectangle.getX() + rectangle.getWidth(), contents.get(y).size());
+			result.addAll(contents.get(y).subList(left, right));
+		}
+		return result;
 	}
 
 	/**
