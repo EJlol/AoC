@@ -1,9 +1,9 @@
 package nl.eleven.adventofcode.puzzles.year2023.day3_gearratios;
 
 import nl.eleven.adventofcode.models.position.Position;
-import nl.eleven.adventofcode.models.rect.ColumnSpan;
 import nl.eleven.adventofcode.models.rect.Rectangle;
 import nl.eleven.adventofcode.models.table.CharacterTableMapper;
+import nl.eleven.adventofcode.models.table.ColumnSpan;
 import nl.eleven.adventofcode.models.table.Table;
 import nl.eleven.adventofcode.tasks.TaskInterface;
 import org.springframework.stereotype.Component;

@@ -1,6 +1,6 @@
 package nl.eleven.adventofcode.puzzles.year2015.day6_problablyafirehazard;
 
-import nl.eleven.adventofcode.helpers.string.MultiPatternStringHelper;
+import nl.eleven.adventofcode.helpers.pattern.MultiPatternStringHelper;
 import nl.eleven.adventofcode.models.rect.Rectangle;
 import nl.eleven.adventofcode.tasks.TaskInterface;
 import org.springframework.stereotype.Component;

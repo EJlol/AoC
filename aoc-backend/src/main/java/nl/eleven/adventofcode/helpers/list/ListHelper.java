@@ -1,5 +1,7 @@
 package nl.eleven.adventofcode.helpers.list;
 
+import nl.eleven.adventofcode.models.pair.Pair;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -49,5 +51,16 @@ public class ListHelper {
 		List<T> resultList = new ArrayList<>(list);
 		Collections.reverse(resultList);
 		return resultList;
+	}
+
+	public static <T, U> List<Pair<T, U>> zip(List<T> list1, List<U> list2) {
+		if (list1.size() != list2.size()) {
+			throw new IllegalArgumentException("Lists must be of equal size");
+		}
+		List<Pair<T, U>> result = new ArrayList<>();
+		for (int i = 0; i < list1.size(); i++) {
+			result.add(new Pair<>(list1.get(i), list2.get(i)));
+		}
+		return result;
 	}
 }

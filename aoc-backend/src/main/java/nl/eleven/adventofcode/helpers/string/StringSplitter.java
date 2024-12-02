@@ -80,4 +80,8 @@ public class StringSplitter {
 	public static List<String> splitAtString(String input, String splitString) {
 		return Lists.newArrayList(input.split(Pattern.quote(splitString)));
 	}
+
+	public static List<String> splitAtWhitespace(String input) {
+		return Lists.newArrayList(input.trim().split("\\s+"));
+	}
 }

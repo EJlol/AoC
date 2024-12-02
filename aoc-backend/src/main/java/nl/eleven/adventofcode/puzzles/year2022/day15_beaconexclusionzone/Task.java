@@ -3,7 +3,7 @@ package nl.eleven.adventofcode.puzzles.year2022.day15_beaconexclusionzone;
 import com.google.common.collect.Range;
 import com.google.common.collect.RangeSet;
 import com.google.common.collect.TreeRangeSet;
-import nl.eleven.adventofcode.helpers.string.PatternStringHelper;
+import nl.eleven.adventofcode.helpers.pattern.PatternStringHelper;
 import nl.eleven.adventofcode.models.maptable.MapTable;
 import nl.eleven.adventofcode.models.position.Position;
 import nl.eleven.adventofcode.tasks.TaskInterface;

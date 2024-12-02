@@ -1,4 +1,4 @@
-package nl.eleven.adventofcode.helpers.string;
+package nl.eleven.adventofcode.helpers.pattern;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,35 +8,43 @@ public class PatternStringHelper {
 	public static Map<String, String> getParameters(String input, String pattern) {
 		ParameterStringSplitter splitter = new ParameterStringSplitter();
 		splitter.parse(input, pattern);
-		return splitter.getResult();
+		return splitter.getStringResults();
 	}
 
 	protected static class ParameterStringSplitter {
 
 		String input;
 
+		Map<String, Integer> integerResults;
+
 		String pattern;
 
 		int patternLength;
 
-		Map<String, String> result;
+		Map<String, String> stringResults;
 
 		public ParameterStringSplitter() {
-			result = new HashMap<>();
+			stringResults = new HashMap<>();
+			integerResults = new HashMap<>();
+		}
+
+		public Map<String, Integer> getIntegerResults() {
+			return integerResults;
 		}
 
 		public int getPatternLength() {
 			return patternLength;
 		}
 
-		public Map<String, String> getResult() {
-			return result;
+		public Map<String, String> getStringResults() {
+			return stringResults;
 		}
 
 		public void parse(String input, String pattern) {
 			this.input = input;
 			this.pattern = pattern;
-			this.result = new HashMap<>();
+			this.stringResults = new HashMap<>();
+			this.integerResults = new HashMap<>();
 			this.patternLength = 0;
 
 			readAllValues();
@@ -93,7 +101,12 @@ public class PatternStringHelper {
 				value = input;
 				searchIndex = input.length();
 			}
-			result.put(key, value);
+
+			if (key.endsWith(":i")) {
+				integerResults.put(key.substring(0, key.length() - 2), Integer.parseInt(value.trim()));
+			} else {
+				stringResults.put(key, value.trim());
+			}
 
 			input = input.substring(searchIndex);
 			pattern = pattern.substring(pattern.indexOf('}') + 1);

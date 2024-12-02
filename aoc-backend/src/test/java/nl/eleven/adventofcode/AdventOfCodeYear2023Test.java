@@ -41,6 +41,12 @@ class AdventOfCodeYear2023Test {
 		executeTask(3, 2, "81296995");
 	}
 
+	@Test
+	void year2023day4() {
+		executeTask(4, 1, "517021");
+		executeTask(4, 2, "81296995");
+	}
+
 	private void executeTask(int day, int taskNumber, String answer) {
 		String result = taskService.executeTask(2023, day, taskNumber);
 		assertEquals(answer, result);

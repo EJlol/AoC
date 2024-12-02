@@ -1,4 +1,4 @@
-package nl.eleven.adventofcode.helpers.string;
+package nl.eleven.adventofcode.helpers.pattern;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,7 +33,7 @@ public class MultiPatternStringHelper<T> {
 				// update the maximum length and store the result.
 				if (splitter.getPatternLength() > maxPatternLength) {
 					maxPatternLength = splitter.getPatternLength();
-					result = new PatternResult<>(pattern, splitter.getResult());
+					result = new PatternResult<>(pattern, splitter.getStringResults());
 				}
 			} catch (IllegalArgumentException _) {
 				// If the pattern does not match the input string, ignore the exception and continue with the next pattern.

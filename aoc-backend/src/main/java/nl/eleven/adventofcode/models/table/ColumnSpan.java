@@ -1,6 +1,7 @@
-package nl.eleven.adventofcode.models.rect;
+package nl.eleven.adventofcode.models.table;
 
 import nl.eleven.adventofcode.models.position.Position;
+import nl.eleven.adventofcode.models.rect.Rectangle;
 
 public class ColumnSpan {
 

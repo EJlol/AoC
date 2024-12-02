@@ -1,6 +1,6 @@
 package nl.eleven.adventofcode.puzzles.year2015.day2_iwastoldtherewouldbenomath;
 
-import nl.eleven.adventofcode.helpers.string.PatternStringHelper;
+import nl.eleven.adventofcode.helpers.pattern.PatternStringHelper;
 import nl.eleven.adventofcode.helpers.utils.TriFunction;
 import nl.eleven.adventofcode.models.rect.Cuboid;
 import nl.eleven.adventofcode.tasks.TaskInterface;
